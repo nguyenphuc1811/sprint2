@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>    <style>
+        @media (min-width: 1025px) {
+            .h-custom {
+                height: 100vh !important;
+            }
+        }
+
+        .number-input input[type="number"] {
+            -webkit-appearance: textfield;
+            -moz-appearance: textfield;
+        }
+
+        .number-input input[type=number]::-webkit-inner-spin-button,
+        .number-input input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .number-input button {
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
+        }
+
+        .number-input button:before,
+        .number-input button:after {
+            display: inline-block;
+            position: absolute;
+            content: '';
+            height: 2px;
+            transform: translate(-50%, -50%);
+        }
+
+        .number-input button.plus:after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .number-input input[type=number] {
+            text-align: center;
+        }
+
+        .number-input.number-input {
+            border: 1px solid #ced4da;
+            width: 10rem;
+            border-radius: .25rem;
+        }
+
+        .number-input.number-input button {
+            width: 2.6rem;
+            height: .7rem;
+        }
+
+        .number-input.number-input button.minus {
+            padding-left: 10px;
+        }
+
+        .number-input.number-input button:before,
+        .number-input.number-input button:after {
+            width: .7rem;
+            background-color: #495057;
+        }
+
+        .number-input.number-input input[type=number] {
+            max-width: 4rem;
+            padding: .5rem;
+            border: 1px solid #ced4da;
+            border-width: 0 1px;
+            font-size: 1rem;
+            height: 2rem;
+            color: #495057;
+        }
+
+        @media not all and (min-resolution:.001dpcm) {
+            @supports (-webkit-appearance: none) and (stroke-color:transparent) {
+
+                .number-input.def-number-input.safari_only button:before,
+                .number-input.def-number-input.safari_only button:after {
+                    margin-top: -.3rem;
+                }
+            }
+        }
+
+        .shopping-cart .def-number-input.number-input {
+            border: none;
+        }
+
+        .shopping-cart .def-number-input.number-input input[type=number] {
+            max-width: 2rem;
+            border: none;
+        }
+
+        .shopping-cart .def-number-input.number-input input[type=number].black-text,
+        .shopping-cart .def-number-input.number-input input.btn.btn-link[type=number],
+        .shopping-cart .def-number-input.number-input input.md-toast-close-button[type=number]:hover,
+        .shopping-cart .def-number-input.number-input input.md-toast-close-button[type=number]:focus {
+            color: #212529 !important;
+        }
+
+        .shopping-cart .def-number-input.number-input button {
+            width: 1rem;
+        }
+
+        .shopping-cart .def-number-input.number-input button:before,
+        .shopping-cart .def-number-input.number-input button:after {
+            width: .5rem;
+        }
+
+        .shopping-cart .def-number-input.number-input button.minus:before,
+        .shopping-cart .def-number-input.number-input button.minus:after {
+            background-color: #9e9e9e;
+        }
+
+        .shopping-cart .def-number-input.number-input button.plus:before,
+        .shopping-cart .def-number-input.number-input button.plus:after {
+            background-color: #4285f4;
+        }
+    </style>
+</head>
+<body>
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card shopping-cart" style="border-radius: 15px;">
+                    <div class="card-body text-black">
+
+                        <div class="row">
+                            <div class="col-lg-6 px-5 py-4">
+
+                                    <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Giỏ hàng</h3>
+
+                                <div class="d-flex align-items-center mb-5">
+                                    <div class="flex-shrink-0">
+                                        <img src="https://media.travel.com.vn/tour/tfd_220225095117_550829.jpg"
+                                             class="img-fluid" style="width: 200px;height: 200px" alt="Generic placeholder image">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3" style="padding-left: 5px">
+                                        <h5 class="text-primary">Quy Nhơn - Eo Gió - Kỳ Co - Phú Yên - Gành Đá Dĩa</h5>
+                                        <ul style="padding-left: 0">
+                                            <li style="list-style: none">Địa điểm khởi hành: Quy Nhơn</li>
+                                            <li style="list-style: none">Ngày bắt đầu: 20/03/2023</li>
+                                            <li style="list-style: none">Ngày kết thúc: 22/03/2023</li>
+                                            <li style="list-style: none">Số chỗ còn lại: 5</li>
+                                        </ul>
+                                        <div class="d-flex align-items-center" style="margin-left: 10px">
+                                            <div class="def-number-input number-input safari_only">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                        class="minus"></button>
+                                                <input class="quantity fw-bold text-black" min="0" name="quantity" value="1"
+                                                       type="number">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                        class="plus"></button>
+                                            </div>
+                                            <p class="fw-bold mb-0 me-5 pe-3">500,000đ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+                                <div class="d-flex justify-content-between px-x">
+                                    <p class="fw-bold">Ưu đãi:</p>
+                                    <p class="fw-bold">5%</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                                    <h5 class="fw-bold mb-0">Tổng tiền:</h5>
+                                    <h5 class="fw-bold mb-0">500,000đ</h5>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 px-5 py-4">
+
+                                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Thanh toán</h3>
+
+                                <form class="mb-5">
+
+                                    <div class="form-outline mb-5">
+                                        <input type="text" id="typeText1" class="form-control form-control-lg" siez="17" minlength="19" maxlength="19" />
+                                        <label class="form-label" for="typeText1">Số thẻ</label>
+                                    </div>
+
+                                    <div class="form-outline mb-5">
+                                        <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                                                />
+                                        <label class="form-label" for="typeName">Tên chủ thẻ</label>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-5">
+                                            <div class="form-outline">
+                                                <input type="text" id="typeExp" class="form-control form-control-lg"
+                                                       size="7" id="exp" minlength="7" maxlength="7" />
+                                                <label class="form-label" for="typeExp">Hạn thẻ</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-5">
+                                            <div class="form-outline">
+                                                <input type="password" id="typeText" class="form-control form-control-lg"
+                                                      size="1" minlength="3" maxlength="3" />
+                                                <label class="form-label" for="typeText">Mã số bảo mật</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+<!--                                    <p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit <a-->
+<!--                                            href="#!">obcaecati sapiente</a>.</p>-->
+
+                                    <button type="button" class="btn btn-primary btn-block btn-lg">Đặt ngay</button>
+
+                                    <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
+                                        <a href="#!"><i class="fas fa-angle-left me-2"></i>Trở về đặt tour</a>
+                                    </h5>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

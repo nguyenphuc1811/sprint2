@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<style>
+    @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+    .login-block{
+        background: #ADD8E6;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom, beige, darkgrey);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #87CEEB, #ADD8E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        /*background-color: #ff665c;*/
+        float:left;
+        width:100%;
+        padding : 50px 0;
+    }
+    .banner-sec{background:url("https://i.imgur.com/dg5c7n3.png") no-repeat  left bottom;object-fit: cover;background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
+    .container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
+    .carousel-inner{border-radius:0 10px 10px 0;}
+    .carousel-caption{text-align:left; left:5%;}
+    .login-sec{padding: 50px 30px; position:relative;}
+    .login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
+    .login-sec .copy-text i{color:#87CEEB;}
+    .login-sec .copy-text a{color:#00FFFF;}
+    .login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color:#00FFFF;}
+    .login-sec h2:after{content:" "; width:100px; height:5px; background:#7FFFD4; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
+    .btn-login{background: #00FFFF; color:#fff; font-weight:600;}
+    .btn-login:hover{color:darkgrey;}
+    .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
+    .banner-text h2{color:#fff; font-weight:600;}
+    .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
+    .banner-text p{color:#fff;}
+    /*-----*/
+</style>
+<body>
+<section class="login-block" style="margin-top: 20px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 login-sec">
+                <h2 class="text-center">Đăng Nhập</h2>
+                <form   class="login-form">
+                    <div class="form-group" style="position: relative">
+                        <label  class="text-title" style="font-weight: bold">Tên đăng nhập</label>
+                        <input type="text" class="form-control" >
+                        <span class="spin"></span>
+<!--                        <span style="position: absolute" class="text-danger font-italic">{{message}}</span>-->
+                    </div>
+                    <div class="form-group" style="margin-top: 10px">
+                        <label  class="text-title" style="font-weight: bold">Mật Khẩu</label>
+                        <input  type="password" class="form-control" >
+                    </div>
+                    <div  style="margin-top: 10px" class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" checked class="form-check-input">
+                            <small>Nhớ mật khẩu</small>
+                        </label>
+                        <button style="position: relative;right: 0" type="submit" class="btn btn-login float-right">Đăng Nhập</button>
+                    </div>
+                </form>
+                <div>
+                    <a class="" data-toggle="modal" data-target="#staticBackdrop" style="cursor: pointer;color: blue">Đăng ký</a>
+                </div>
+            </div>
+            <div class="col-md-8 banner-sec">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+</section>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Đăng kí</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Tài khoản</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control">
+<!--                            <span class="text-danger">{{usernameError}}</span>-->
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Họ và tên</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control">
+<!--                            <span class="text-danger">{{nameError}}</span>-->
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control">
+<!--                            <span class="text-danger">{{emailError}}</span>-->
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Mật khẩu</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control">
+<!--                            <span class="text-danger">{{passwordError}}</span>-->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="dismiss" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary" >Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
