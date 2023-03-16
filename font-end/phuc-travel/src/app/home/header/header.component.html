@@ -1,10 +1,10 @@
-<header class="top-area">
+<header class="top-area" style="z-index: 10">
   <div class="header-area">
     <div class="container">
       <div class="row">
         <div class="col-sm-2">
           <div class="logo">
-            <a href="">
+            <a routerLink="/">
               Phuc<span>Travel</span>
             </a>
           </div><!-- /.logo-->
@@ -24,9 +24,9 @@
                 <li class="smooth-menu"><a href="#home">Trang chủ</a></li>
                 <li class="smooth-menu"><a href="#gallery">Điểm đến</a></li>
                 <li class="smooth-menu"><a href="#pack">Gói</a></li>
-                <!--										<li class="smooth-menu"><a href="#spo">Ưu đãi đặc biệt</a></li>-->
+                <li class="smooth-menu"><a routerLink="/cart" >Giỏ hàng</a></li>
                 <li>
-                  <button class="book-btn">Đăng nhập
+                  <button type="button" routerLink="/login" class="book-btn">Đăng nhập
                   </button>
                 </li><!--/.project-btn-->
               </ul>
