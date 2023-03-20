@@ -6,7 +6,6 @@ import {BodyComponent} from './body/body.component';
 import {CartComponent} from './cart/cart.component';
 import { DetailComponent } from './detail/detail.component';
 
-
 @NgModule({
   declarations: [BodyComponent, CartComponent, DetailComponent],
   exports: [
