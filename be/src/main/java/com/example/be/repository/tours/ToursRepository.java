@@ -1,4 +1,4 @@
-package com.example.be.repository;
+package com.example.be.repository.tours;
 
 import com.example.be.model.tours.Tours;
 import org.springframework.data.domain.Page;

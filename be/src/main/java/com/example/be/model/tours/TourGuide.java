@@ -14,7 +14,25 @@ public class TourGuide {
     private String email;
     private String phoneNumber;
     private String address;
+    private Boolean gender;
+    private String avatar;
     private String description;
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public Integer getId() {
         return id;

@@ -1,6 +1,6 @@
 package com.example.be.model.tours;
 
-import com.example.be.model.user.Users;
+import com.example.be.model.user.User;
 
 import javax.persistence.*;
 
@@ -9,13 +9,13 @@ public class Bookings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false,columnDefinition = "date")
+    @Column(nullable = false, columnDefinition = "date")
     private String bookingDate;
     private int slot;
     @ManyToOne
     private Tours tours;
     @ManyToOne
-    private Users users;
+    private User user;
 
     public Integer getId() {
         return id;
@@ -49,11 +49,11 @@ public class Bookings {
         this.tours = tours;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyCSxfJlZsdrzfyrImagRsnUeCAc3yWoIBc",
+    databaseURL: "https://phuc-travel-default-rtdb.firebaseio.com/",
+    authDomain: "phuc-travel.firebaseapp.com",
+    projectId: "phuc-travel",
+    storageBucket: "phuc-travel.appspot.com",
+    messagingSenderId: "408865584421",
+    appId: "1:408865584421:web:15ff6245f84df63be096cc",
+    measurementId: "G-LD6NSNEZC9"
+  }
 };
 
 /*

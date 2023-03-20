@@ -1,7 +1,7 @@
 package com.example.be.service.impl;
 
 import com.example.be.model.tours.Tours;
-import com.example.be.repository.ToursRepository;
+import com.example.be.repository.tours.ToursRepository;
 import com.example.be.service.IToursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
