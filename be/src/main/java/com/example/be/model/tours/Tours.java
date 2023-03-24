@@ -20,13 +20,22 @@ public class Tours {
     @ManyToOne
     private TourGuide tourGuide;
     private Double cost;
-    private Integer slot;
+    private int slot;
+    private String img;
 
-    public Integer getSlot() {
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public int getSlot() {
         return slot;
     }
 
-    public void setSlot(Integer slot) {
+    public void setSlot(int slot) {
         this.slot = slot;
     }
 

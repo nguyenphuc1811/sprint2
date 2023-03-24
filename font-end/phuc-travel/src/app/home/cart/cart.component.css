@@ -1,4 +1,3 @@
-
 @media (min-width: 1025px) {
   .h-custom {
     height: 100vh !important;
@@ -74,7 +73,7 @@
   color: #495057;
 }
 
-@media not all and (min-resolution:.001dpcm) {
+@media not all and (min-resolution: .001dpcm) {
   @supports (-webkit-appearance: none) and (stroke-color:transparent) {
 
     .number-input.def-number-input.safari_only button:before,
@@ -118,8 +117,20 @@
 .shopping-cart .def-number-input.number-input button.plus:after {
   background-color: #4285f4;
 }
-span {cursor:pointer; }
-.number{
-  margin:100px;
+
+span {
+  cursor: pointer;
 }
 
+.number {
+  margin: 100px;
+}
+
+.center {
+  width: 150px;
+  margin: 40px auto;
+}
+
+button:hover {
+  cursor: pointer;
+}

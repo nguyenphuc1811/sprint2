@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {LoginService} from "../../service/user/login.service";
 import {TokenService} from "../../service/user/token.service";
@@ -32,11 +32,12 @@ export class LogInComponent implements OnInit {
     roles: new FormControl('customer')
   });
   islogged = false;
-  constructor(private title:Title,private loginService: LoginService, private token: TokenService, private router: Router, private share: ShareService) {
+
+  constructor(private title: Title, private loginService: LoginService, private token: TokenService, private router: Router, private share: ShareService) {
   }
 
   ngOnInit(): void {
-    window.scroll(0,980)
+    window.scroll(0, 980)
     this.title.setTitle('Trang Đăng Nhập');
     this.islogged = this.token.isLogger();
     if (this.islogged) {
@@ -49,7 +50,6 @@ export class LogInComponent implements OnInit {
         if (this.form.controls.rememberMe.value) {
           this.token.rememberMe(next.token, next.id, next.name, next.username, next.phoneNumber, next.email, next.address, next.age,
             next.gender, next.dateOfBirth, next.avatar, next.roles, 'local');
-
         } else {
           this.token.rememberMe(next.token, next.id, next.name, next.username, next.phoneNumber, next.email, next.address, next.age,
             next.gender, next.dateOfBirth, next.avatar, next.roles, 'session');

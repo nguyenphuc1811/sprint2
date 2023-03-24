@@ -12,4 +12,6 @@ export interface Tours {
   startDate?: string;
   tourGuide?: TourGuide;
   location?: Location;
+  remaining?: number;
+  img?: string;
 }

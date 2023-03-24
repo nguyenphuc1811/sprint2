@@ -38,14 +38,14 @@ public class UserService implements IUserService {
 
     @Override
     public void changePassword(String password, String username) {
-        iUserRepository.changePassword(password,username);
+        iUserRepository.changePassword(password, username);
     }
 
     @Override
     public void save(User user) {
-        iUserRepository.save(user.getName(),user.getUsername(), user.getEmail(), user.getPassword());
+        iUserRepository.save(user.getName(), user.getUsername(), user.getEmail(), user.getPassword());
         User user1 = iUserRepository.findByUsername(user.getUsername()).orElse(null);
-        for (Role x: user.getRoles()) {
+        for (Role x : user.getRoles()) {
             assert user1 != null;
             iUserRepository.insertRole(user1.getId(), x.getId());
         }
@@ -53,22 +53,14 @@ public class UserService implements IUserService {
 
     @Override
     public Boolean existsByUsername(String username) {
-        for (int i = 0; i < iUserRepository.getAllUser().size(); i++) {
-            if (iUserRepository.getAllUser().get(i).getUsername().equals(username)) {
-                return true;
-            }
-        }
-        return false;
+
+        return iUserRepository.existsByUsername(username);
     }
 
     @Override
     public Boolean existsByEmail(String email) {
-        for (int i = 0; i < iUserRepository.getAllUser().size(); i++) {
-            if (iUserRepository.getAllUser().get(i).getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+
+        return iUserRepository.existsByEmail(email);
     }
 
     @Override

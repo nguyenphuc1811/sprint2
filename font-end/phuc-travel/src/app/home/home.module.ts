@@ -5,16 +5,17 @@ import {HomeRoutingModule} from './home-routing.module';
 import {BodyComponent} from './body/body.component';
 import {CartComponent} from './cart/cart.component';
 import { DetailComponent } from './detail/detail.component';
+import { ProfileComponent } from './profile/profile.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-  declarations: [BodyComponent, CartComponent, DetailComponent],
-  exports: [
-    BodyComponent
-  ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule
-  ]
+  declarations: [BodyComponent, CartComponent, DetailComponent, ProfileComponent],
+  exports: [],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class HomeModule {
 }

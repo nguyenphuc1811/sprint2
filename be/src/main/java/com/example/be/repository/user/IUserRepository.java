@@ -15,10 +15,9 @@ import java.util.Optional;
 
 @Transactional
 public interface IUserRepository extends JpaRepository<User, Integer> {
-    @Query(value = "select * from user where username = :username", nativeQuery = true)
-    Optional<User> findByUsername(@Param("username") String username);
-
-
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
+    Optional<User> findByUsername(String username);
     @Modifying
     @Query(value = "update user set name = :name,phone_number = :phone_number,email = :email," +
             " address = :address,age = :age,gender = :gender,date_of_birth = :date_of_birth,avatar = :avatar" +

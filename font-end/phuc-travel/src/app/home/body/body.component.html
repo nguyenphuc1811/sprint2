@@ -1,13 +1,12 @@
-
 <section class="travel-box">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="single-travel-boxes">
-          <div id="desc-tabs" class="desc-tabs">
-            <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active">
-                <a href="#tours" aria-controls="tours" role="tab" data-toggle="tab">
+          <div class="desc-tabs">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#tours">
                   <i class="fa fa-plane"></i>
                   Tìm kiếm tour mong muốn
                 </a>
@@ -15,9 +14,8 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active fade in" id="tours">
+              <div class="tab-pane active">
                 <div class="tab-para">
-
                   <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                       <div class="single-tab-select-box">
@@ -33,15 +31,12 @@
                         </div>
                       </div><!--/.single-tab-select-box-->
                     </div><!--/.col-->
-
                     <div class="col-lg-2 col-md-3 col-sm-4">
                       <div class="single-tab-select-box">
                         <h2>Ngày đi</h2>
                         <div class="travel-check-icon">
-                          <form action="#">
-                            <input type="text" name="check_in" class="form-control"
-                                   data-toggle="datepicker" placeholder="12-01-2017 ">
-                          </form>
+                          <input type="date" name="check_in" class="form-control"
+                                 data-toggle="datepicker" placeholder="12-01-2017 ">
                         </div><!-- /.travel-check-icon -->
                       </div><!--/.single-tab-select-box-->
                     </div><!--/.col-->
@@ -77,8 +72,7 @@
     </div><!--/.row-->
   </div><!--/.container-->
 </section><!--/.travel-box-->
-<!--travel-box end-->
-<!--galley start-->
+
 <section id="gallery" class="gallery">
   <div class="container">
     <div class="gallery-details">
@@ -137,10 +131,7 @@
       </div><!--/.galley-box-->
     </div><!--/.gallery-details-->
   </div><!--/.container-->
-
 </section><!--/.gallery-->
-<!--gallery end-->>
-<!--packages start-->
 <section id="pack" class="packages">
   <div class="container">
     <div class="gallary-header text-center">
@@ -152,7 +143,7 @@
       <div class="row">
         <div class="col-md-4 col-sm-6">
           <div class="single-package-item">
-            <img style="height: 300px;width: 370px"
+            <img style="height: 100%;width: 100%"
                  src="https://media.travel.com.vn/destination/tf_220524051513_710474.jpg"
                  alt="package-place">
             <div class="single-package-item-txt">
@@ -187,7 +178,44 @@
             </div><!--/.single-package-item-txt-->
           </div><!--/.single-package-item-->
         </div><!--/.col-->
+        <div class="col-md-4 col-sm-6" *ngFor="let tour of tours">
+          <div class="single-package-item">
+            <img style="height: 100%;width: 100%"
+                 src="{{tour.img}}"
+                 alt="package-place">
+            <div class="single-package-item-txt">
+              <h3>Huế<span class="pull-right" style="color: blue">{{tour.price | currency: 'VND':'symbol'}}</span></h3>
+              <div class="packages-para">
+                <p>
+                  <i class="fa fa-angle-right"></i>{{tour.schedule}}
+                  <span style="color: blue;">Số chỗ còn nhận :</span> <span style="color: red">{{tour.remaining}}</span>
+                  <span style="color: blue;">Nơi khởi hành:</span> <span
+                  style="color: red">{{tour.location}}</span>
+                </p>
+              </div>
+              <div class="packages-review">
+                <p>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </p>
+              </div><!--/.packages-review-->
+              <div class="about-btn">
+                <button type="button" routerLink="/detail" class="about-view packages-btn">
+                  Đặt ngay
+                </button>
+              </div><!--/.about-btn-->
+            </div><!--/.single-package-item-txt-->
+          </div><!--/.single-package-item-->
+        </div>
       </div><!--/.row-->
+    </div>
+    <div style="display: flex;align-items: center">
+      <button class="about-view travel-btn">
+        Xem thêm
+      </button>
     </div><!--/.packages-content-->
   </div><!--/.container-->
 </section>

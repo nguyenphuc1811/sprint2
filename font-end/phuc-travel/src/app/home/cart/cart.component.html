@@ -19,27 +19,26 @@
                     <li style="list-style: none">Ngày kết thúc: <span class="text-primary">22/03/2023</span></li>
                     <li style="list-style: none">Số chỗ còn lại: <span class="text-primary">5</span></li>
                   </ul>
-                  <div class="center" style="width: 140px; position: relative">
-                    <div class="input-group">
-          <span class="input-group-btn">
-              <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
-                <span class="glyphicon glyphicon-minus"></span>
-              </button>
-          </span>
-                      <input type="text" name="quant[2]" class="form-control input-number text-center" value="10" min="1"
-                             max="100">
-                      <span class="input-group-btn">
-              <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                  <span class="glyphicon glyphicon-plus"></span>
-              </button>
-          </span>
-                    </div>
+                  <div class="d-flex">
+                    <button class="btn btn-link px-2" style="background-color: #FF9933"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                      <i class="fas fa-minus" style="color: white"></i>
+                    </button>
+
+                    <input id="form1" min="0" style="width: 50px; height: 30px;text-align: center" name="quantity"
+                           value="1" type="number"
+                           class="form-control form-control-sm"/>
+
+                    <button class="btn btn-link px-2" style="background-color: #FF9933"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                      <i class="fas fa-plus" style="color: white"></i>
+                    </button>
                   </div>
                 </div>
               </div>
               <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
-              <div class="d-flex" style="background-color: #e1f5fe; padding: 5px">
-                <h3 class="fw-bold mb-0">Tổng tiền: <span class="pull-right">500,000đ</span></h3>
+              <div class="" style="background-color: #e1f5fe; padding: 5px">
+                <h3 class="fw-bold mb-0" style="justify-content: space-between">Tổng tiền: <span>500,000đ</span></h3>
               </div>
             </div>
             <div class="col-lg-4 px-5 py-4">

@@ -1,0 +1,243 @@
+<div class="container emp-profile" style="margin-top: 78px;">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="profile-img">
+        <img src="{{user.avatar}}" alt="" style="width: 250px;height: 250px"/>
+      </div>
+    </div>
+    <div class="col-md-6" >
+      <div class="profile-head">
+
+        <h5>
+          {{user.name}}
+        </h5>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+               aria-selected="true">Giới thiệu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+               aria-selected="false">Cá nhân</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <input type="submit" data-toggle="modal" data-target="#staticBackdrop" class="profile-edit-btn" name="btnAddMore"
+             value="Chỉnh Sửa"/>
+    </div>
+
+  </div>
+  <div class="row" style="margin-top: -130px">
+    <div class="col-md-4">
+      <div class="profile-work">
+        <p></p>
+        <a href=""></a><br/>
+        <a href=""></a><br/>
+        <a href=""></a>
+        <p></p>
+        <a href=""></a><br/>
+        <a href=""></a><br/>
+        <a href=""></a><br/>
+        <a href=""></a><br/>
+        <a href=""></a><br/>
+      </div>
+    </div>
+    <div class="col-md-8" >
+      <div class="tab-content profile-tab" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Họ Và Tên</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.name}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Email</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.email}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Số Điện Thoại</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.phoneNumber}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Địa Chỉ</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.address}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Ngày Sinh</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.dateOfBirth | date: 'dd/MM/yyyy'}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Giới Tính</label>
+            </div>
+            <div class="col-md-6">
+              <p *ngIf="user.gender == true">Nam</p>
+              <p *ngIf="user.gender == false">Nữ</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Tuổi</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.age}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa thông tin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="update()">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Họ Và Tên:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="name">
+              <span class="text-danger">{{nameError}}</span>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Số Điện Thoại:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="phoneNumber">
+              <span class="text-danger">{{phoneNumberError}}</span>
+
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Giới tính:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+              <input type="radio" [value]="true" class="form-radio" formControlName="gender"> Nam
+              <input type="radio" [value]="false" class="form-radio" formControlName="gender"> Nữ
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Email:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" formControlName="email">
+              <span class="text-danger">{{emailError}}</span>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Địa chỉ:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="address">
+              <span class="text-danger">{{addressError}}</span>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Sinh:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" formControlName="dateOfBirth">
+              <span class="text-danger">{{dateOfBirthError}}</span>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ảnh Đại Diện:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+<!--              <input type="file"  (change)="showPreview($event)">-->
+              <input style="display:none;" formControlName="avatar"> <br> <br>
+              <img style="width: 90px" [src]="user.avatar">
+              <span class="text-danger">{{avatarError}}</span>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Đổi Mật Khẩu:<span style="color: red">(*):</span></label>
+            <div class="col-sm-10">
+              <button class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop2"
+                      type="button">+
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="dismiss" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            <button type="submit" class="btn btn-primary">Xác Nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>x
+<div class="modal fade" id="staticBackdrop2" style="top: 100px" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg" style="background: antiquewhite">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel2">Cập nhật mật khẩu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formPassword" (ngSubmit)="changePassword()">
+            <div class="mb-3 row">
+              <label class="col-sm-2 col-form-label">Mật khẩu cũ</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" formControlName="password">
+                <span class="text-danger">{{passwordError}}</span>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label class="col-sm-2 col-form-label">Mật khẩu mới</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" formControlName="newPassword">
+                <span class="text-danger">{{newPasswordError}}</span>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label class="col-sm-2 col-form-label">Mật khẩu xác nhận</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" formControlName="confirmPassword">
+                <span class="text-danger">{{confirmPasswordError}}</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="dismiss2" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+              <button type="submit" class="btn btn-primary">Xác Nhận</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
