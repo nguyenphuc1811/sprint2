@@ -147,8 +147,8 @@ public class AuthController {
         return new ResponseEntity<>(iUserService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/profile/{username}")
-    public ResponseEntity<?> profile(@PathVariable("username") String username) {
-        return new ResponseEntity<>(iUserService.userLogin(username), HttpStatus.ACCEPTED);
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<?> profile(@PathVariable("id") int id) {
+        return new ResponseEntity<>(iUserService.findById(id), HttpStatus.ACCEPTED);
     }
 }

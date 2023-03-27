@@ -11,8 +11,16 @@ export class ToursService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getTours(id: number, startDate: string, slot: number, page: number): Observable<any> {
+  getTours(id: string, startDate: string, slot: string, page: number): Observable<any> {
     return this.httpClient.get(this.URL + 'toursDto?locationId=' + id + '&startDate=' + startDate
       + '&slot=' + slot + '&page=' + page);
+  }
+
+  getLocation(): Observable<any> {
+    return this.httpClient.get(this.URL + 'location');
+  }
+
+  getDetail(id: number): Observable<any> {
+    return this.httpClient.get(this.URL + 'detail?id=' + id);
   }
 }

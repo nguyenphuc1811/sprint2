@@ -61,4 +61,12 @@ public class HomeController {
     public ResponseEntity<?> getLocation() {
         return new ResponseEntity<>(locationService.getAll(), HttpStatus.OK);
     }
+
+    @GetMapping("detail")
+    public ResponseEntity<?> findByIdTour(@RequestParam(name = "id") int id) {
+        if (toursService.findById(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(toursService.findById(id), HttpStatus.OK);
+    }
 }

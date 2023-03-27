@@ -9,7 +9,7 @@ import {ProfileComponent} from "./profile/profile.component";
 const routes: Routes = [
   {path: '', component: BodyComponent},
   {path: 'cart',component: CartComponent},
-  {path: 'detail',component: DetailComponent},
+  {path: 'detail/:id',component: DetailComponent},
   {path: 'profile',component: ProfileComponent}
 ];
 

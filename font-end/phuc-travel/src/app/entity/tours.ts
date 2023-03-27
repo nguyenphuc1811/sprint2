@@ -2,6 +2,7 @@ import {TourGuide} from "./tour-guide";
 import {Location} from "./location";
 
 export interface Tours {
+  id?: number;
   cost?: number;
   description?: string;
   endDate?: string;

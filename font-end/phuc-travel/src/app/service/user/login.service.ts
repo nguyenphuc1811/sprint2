@@ -44,7 +44,7 @@ export class LoginService {
     })
   }
 
-  profile(username): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/api/auth/profile/' + username);
+  profile(id): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/api/auth/profile/' + id);
   }
 }

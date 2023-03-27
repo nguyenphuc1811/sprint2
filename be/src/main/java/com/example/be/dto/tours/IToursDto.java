@@ -14,5 +14,6 @@ public interface IToursDto {
     TourGuide getTourGuide();
     Double getCost();
     int getSlot();
+    String getImg();
     int getRemaining();
 }

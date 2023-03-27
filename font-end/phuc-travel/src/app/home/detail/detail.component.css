@@ -6,11 +6,17 @@
   margin: 0;
   font-family: 'Open Sans', sans-serif;
 }
-body{
-  line-height: 1.5;
+/*body{*/
+/*  line-height: 1.5;*/
+/*}*/
+p , span {
+  font-size: 18px;
 }
+
 .card-wrapper{
+  background-color: #e3dcdc;
   max-width: 100%;
+  max-height: 100%;
   margin: 0 auto;
 }
 img{

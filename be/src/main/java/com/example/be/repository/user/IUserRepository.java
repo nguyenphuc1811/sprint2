@@ -88,4 +88,5 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select u.* from `user` u join `bill` b on u.id = b.user_id join `bill_history` bh on b.id = bh.bill_id group by u.id", nativeQuery = true)
     List<User> getUserHasBuy();
+
 }

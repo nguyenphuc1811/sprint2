@@ -5,17 +5,26 @@ import com.example.be.model.user.User;
 import javax.persistence.*;
 
 @Entity
-public class Bookings {
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false, columnDefinition = "date")
+    @Column(columnDefinition = "date")
     private String bookingDate;
     private int slot;
     @ManyToOne
     private Tours tours;
     @ManyToOne
     private User user;
+    private boolean payment;
+
+    public boolean isPayment() {
+        return payment;
+    }
+
+    public void setPayment(boolean payment) {
+        this.payment = payment;
+    }
 
     public Integer getId() {
         return id;

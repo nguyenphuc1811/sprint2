@@ -93,3 +93,6 @@ body{
   font-weight: 600;
   color: #0062cc;
 }
+p , span {
+  font-size: 18px;
+}

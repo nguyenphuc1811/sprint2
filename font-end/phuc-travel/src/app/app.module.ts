@@ -10,6 +10,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {TokenService} from "./service/user/token.service";
 import {LoginModule} from "./login/login.module";
+import { AngularFireStorageModule } from '@angular/fire/storage/public_api';
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import {LoginModule} from "./login/login.module";
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    LoginModule
+    LoginModule,
+    // AngularFireStorageModule,
+    // AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [TokenService],
   bootstrap: [AppComponent]

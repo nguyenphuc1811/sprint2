@@ -23,6 +23,7 @@ public class UserService implements IUserService {
         return iUserRepository.findByUsername(username);
     }
 
+
     @Override
     public void updateUser(UpdateUserForm updateUserForm) {
         iUserRepository.updateUser(updateUserForm.getName(),
@@ -115,5 +116,10 @@ public class UserService implements IUserService {
     @Override
     public User userLogin(String username) {
         return iUserRepository.userLogin(username);
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id).get();
     }
 }

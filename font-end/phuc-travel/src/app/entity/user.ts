@@ -1,3 +1,5 @@
+import {Cart} from "./cart";
+
 export interface User {
   avatar?: string;
   id?: number;
@@ -10,4 +12,5 @@ export interface User {
   age?: number;
   gender?: boolean;
   dateOfBirth?: string;
+  cart?: Cart;
 }

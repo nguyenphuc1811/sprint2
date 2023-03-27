@@ -134,3 +134,6 @@ span {
 button:hover {
   cursor: pointer;
 }
+p , span {
+  font-size: 18px;
+}
