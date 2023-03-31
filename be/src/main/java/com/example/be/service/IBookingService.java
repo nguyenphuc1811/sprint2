@@ -8,11 +8,12 @@ import java.util.List;
 public interface IBookingService {
     boolean addBooking(Booking booking);
 
-    public List<Booking> getListCard(boolean check, User user);
-
     boolean removeBooking(int id);
 
     Booking getById(int id);
 
-    Booking findByUserAndTours(Booking booking);
+    void deleteByUserIdAndToursId(int userId, int toursId);
+   
+    List<Booking> findAllByPaymentAndUser(int id);
+    void saveQuantity(List<Booking> bookingList);
 }

@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import {Router} from "@angular/router";
 import {BookingService} from "../../service/booking/booking.service";
 import {LoginService} from "../../service/user/login.service";
+import {User} from "../../entity/user";
+import {ShareService} from "../../service/user/share.service";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -33,15 +35,22 @@ export class BodyComponent implements OnInit {
   slot = '0';
   page = 0;
   last: boolean;
+  user: User;
 
   constructor(private toursService: ToursService,
               private token: TokenService, private router: Router
     , private booking: BookingService,
-              private login: LoginService) {
+              private login: LoginService,
+              private share: ShareService) {
     this.toursService.getLocation().subscribe(data => {
       this.locations = data;
     })
     this.searchTours(this.id, this.startDate, this.slot);
+    if (this.token.isLogger()) {
+      this.login.profile(this.token.getId()).subscribe(user => {
+        this.user = user;
+      })
+    }
   }
 
   ngOnInit(): void {
@@ -55,7 +64,6 @@ export class BodyComponent implements OnInit {
     this.toursService.getTours(this.id, this.startDate, this.slot, this.page).subscribe(
       data => {
         this.tours = data.content;
-        console.log(this.tours)
         this.last = data.last;
       }
     )
@@ -74,11 +82,14 @@ export class BodyComponent implements OnInit {
 
   addToCart(tour: Tours) {
     if (this.token.isLogger()) {
-      this.login.profile(this.token.getId()).subscribe(user => {
-        this.booking.addBooking(tour, user);
+      this.booking.addBooking(tour, this.user).subscribe(next => {
+        this.share.sendClickEvent();
         Toast.fire({
-          iconHtml: '<img style="width: 90px;height: 90px;object-fit: cover;padding: 10px"  src="' + 'tour.img' + '">',
-          title: 'Bạn đã thêm ' + tour.name + ' vào giỏ!'
+          html: '<span style="font-size: 16px;color: blue">Đã thêm vào giỏ hàng</span>  <img style="width: 300px;height: 100px;object-fit: cover"  src="' + tour.img + '">'
+        })
+      }, error => {
+        Toast.fire({
+          html: '<span style="font-size: 16px;color: red">Đã có trong giỏ hàng. Vui lòng nhập số lượng tại giỏ hàng</span>  <img style="width: 300px;height: 100px;object-fit: cover"  src="' + tour.img + '">'
         })
       })
     } else {

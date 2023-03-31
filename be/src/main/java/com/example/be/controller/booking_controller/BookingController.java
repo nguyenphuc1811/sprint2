@@ -1,13 +1,19 @@
 package com.example.be.controller.booking_controller;
 
+import com.example.be.dto.tours.BookingDto;
+import com.example.be.dto.tours.IToursDto;
 import com.example.be.model.tours.Booking;
 import com.example.be.service.IBookingService;
 import com.example.be.service.IToursService;
 import com.example.be.service.IUserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -23,24 +29,39 @@ public class BookingController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookingCart(@PathVariable("id") int id) {
         if (iUserService.findById(id) == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(toursService.findAllByUser(id), HttpStatus.OK);
+        List<Booking> bookingList = bookingService.findAllByPaymentAndUser(id);
+        List<BookingDto> bookingDtos = new ArrayList<>();
+        for (Booking booking : bookingList) {
+            BookingDto bookingDto = new BookingDto();
+            BeanUtils.copyProperties(booking, bookingDto);
+            bookingDto.setiToursDto(toursService.findOneById(bookingDto.getId()));
+            bookingDtos.add(bookingDto);
+        }
+        return new ResponseEntity<>(bookingDtos, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBooking(@PathVariable int id) {
         if (bookingService.removeBooking(id)) {
-            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>("Xóa không thành công", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("add")
     public ResponseEntity<?> addBookingToCart(@RequestBody Booking booking) {
         if (bookingService.addBooking(booking)) {
-            return new ResponseEntity<>("Đã Thêm thành công vào giỏ", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>("Đã có tour trong giỏ hàng", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @PutMapping("update")
+    public ResponseEntity<?> updateQuantityBooking(@RequestBody List<Booking> bookingList) {
+        bookingService.saveQuantity(bookingList);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

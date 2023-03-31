@@ -8,8 +8,6 @@ import com.example.be.service.IBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,15 +16,11 @@ public class BookingServiceImpl implements IBookingService {
     private BookingRepository bookingRepository;
 
     public boolean addBooking(Booking booking) {
-        if (findByUserAndTours(booking) != null) {
+        if (bookingRepository.existsByUserIdAndToursId(booking.getUser().getId(), booking.getTours().getId())) {
             return false;
         }
         bookingRepository.save(booking);
         return true;
-    }
-
-    public List<Booking> getListCard(boolean check, User user) {
-        return bookingRepository.findAllByPaymentAndUser(check, user);
     }
 
     public boolean removeBooking(int id) {
@@ -41,7 +35,19 @@ public class BookingServiceImpl implements IBookingService {
         return bookingRepository.findById(id).get();
     }
 
-    public Booking findByUserAndTours(Booking booking) {
-        return bookingRepository.findByUserAndTours(booking.getUser(), booking.getTours());
+    @Override
+    public void deleteByUserIdAndToursId(int userId, int toursId) {
+        bookingRepository.deleteByUserIdAndToursId(userId, toursId);
+    }
+
+    public List<Booking> findAllByPaymentAndUser(int id) {
+        return bookingRepository.findAllByPaymentAndUserId(false, id);
+    }
+
+    public void saveQuantity(List<Booking> bookingList) {
+        for (Booking booking : bookingList) {
+            bookingRepository.updateBooking(
+                    booking.getSlot(), false,booking.getId());
+        }
     }
 }

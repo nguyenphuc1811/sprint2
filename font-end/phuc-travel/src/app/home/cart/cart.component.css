@@ -7,6 +7,7 @@
 .number-input input[type="number"] {
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .number-input input[type=number]::-webkit-inner-spin-button,
@@ -73,7 +74,7 @@
   color: #495057;
 }
 
-@media not all and (min-resolution: .001dpcm) {
+@media not all and (min-resolution:.001dpcm) {
   @supports (-webkit-appearance: none) and (stroke-color:transparent) {
 
     .number-input.def-number-input.safari_only button:before,
@@ -119,21 +120,8 @@
 }
 
 span {
-  cursor: pointer;
+  font-size: 16px;
 }
-
-.number {
-  margin: 100px;
-}
-
-.center {
-  width: 150px;
-  margin: 40px auto;
-}
-
-button:hover {
-  cursor: pointer;
-}
-p , span {
-  font-size: 18px;
+li .d-flex button {
+  height: 30px;
 }

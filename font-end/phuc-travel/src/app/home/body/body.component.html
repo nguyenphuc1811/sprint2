@@ -134,70 +134,38 @@
     </div><!--/.gallery-header-->
     <div class="packages-content">
       <div class="row">
-        <!--        <div class="col-md-4 col-sm-6">-->
-        <!--          <div class="single-package-item">-->
-        <!--            <img style="height: 100%;width: 100%"-->
-        <!--                 src="https://media.travel.com.vn/destination/tf_220524051513_710474.jpg"-->
-        <!--                 alt="package-place">-->
-        <!--            <div class="single-package-item-txt">-->
-        <!--              <h3>Huế <span class="pull-right" style="color: blue">500,000đ</span></h3>-->
-        <!--              <div class="packages-para">-->
-        <!--                <p>-->
-        <!--                  <i class="fa fa-angle-right"></i>Đà Nẵng – KDL Bà Nà – Sơn Trà – Hội An – La Vang - -->
-        <!--                  Động Thiên Đường – Làng hương Thủy Xuân - Huế (Khách sạn 4* trọn tour)-->
-        <!--                </p>-->
-        <!--                <p>-->
-        <!--											<span>-->
-        <!--												<i class="fa fa-angle-right"></i>  5 ngày 6 đêm-->
-        <!--											</span>-->
-        <!--                  <i class="fa fa-angle-right"></i>Nơi khởi hành: Hội An-->
-        <!--                </p>-->
-        <!--              </div>&lt;!&ndash;/.packages-para&ndash;&gt;-->
-        <!--              <div class="packages-review">-->
-        <!--                <p>-->
-        <!--                  <i class="fa fa-star"></i>-->
-        <!--                  <i class="fa fa-star"></i>-->
-        <!--                  <i class="fa fa-star"></i>-->
-        <!--                  <i class="fa fa-star"></i>-->
-        <!--                  <i class="fa fa-star"></i>-->
-        <!--                  <span style="color: blue;">Số chỗ còn nhận :</span>5-->
-        <!--                </p>-->
-        <!--              </div>&lt;!&ndash;/.packages-review&ndash;&gt;-->
-        <!--              <div class="about-btn">-->
-        <!--                <button type="button" routerLink="/detail" class="about-view packages-btn">-->
-        <!--                  Đặt ngay-->
-        <!--                </button>-->
-        <!--              </div>&lt;!&ndash;/.about-btn&ndash;&gt;-->
-        <!--            </div>&lt;!&ndash;/.single-package-item-txt&ndash;&gt;-->
-        <!--          </div>&lt;!&ndash;/.single-package-item&ndash;&gt;-->
-        <!--        </div>&lt;!&ndash;/.col&ndash;&gt;-->
         <div class="col-md-4 col-sm-6" *ngFor="let tour of tours">
           <div class="single-package-item">
-            <img style="height: 100%;width: 100%"
+            <img style="height: 233px;width: 100%"
                  src="{{tour.img}}"
                  alt="package-place">
             <div class="single-package-item-txt">
               <h3>Huế<span class="pull-right"
-                           style="color: blue">{{tour.price | number}}</span></h3>
-              <div class="packages-para"  style="height: 200px">
-                <p>
-                  <i class="fa fa-angle-right"></i>{{tour.schedule}}
-                </p>
-                <p><span style="color: blue;">Số chỗ còn nhận :</span> <span
-                  style="color: red">{{tour.remaining}}</span></p>
-                <p>
-                  <span style="color: blue;">Nơi khởi hành:</span> <span
-                  style="color: red">{{tour.location}}</span></p>
+                           style="color: blue">{{tour.price | number}}<sup>đ</sup></span></h3>
+              <!--              <span class="pull-right"-->
+              <!--                    style="color: gray; font-size: 16px;text-decoration: line-through;">{{tour.price * 1.1 | number}}<sup>đ</sup></span>-->
+              <div class="packages-para">
+                <ul>
+                  <li>
+                    <span><i class="fa fa-angle-right"></i>{{tour.schedule | slice: 0:60}}<span
+                      *ngIf="tour.schedule.length > 60">...</span></span>
+                  </li>
+                  <li><span style="color: blue;">Số chỗ còn nhận :</span> <span
+                    style="color: red">{{tour.remaining}}</span></li>
+                  <li><span style="color: blue;">Nơi khởi hành:</span> <span
+                    style="color: red">{{tour.location}}</span>
+                  </li>
+                </ul>
               </div>
-              <div class="packages-review">
-                <p>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </p>
-              </div>
+              <!--              <div class="packages-review">-->
+              <!--                                <p>-->
+              <!--                                  <i class="fa fa-star"></i>-->
+              <!--                                  <i class="fa fa-star"></i>-->
+              <!--                                  <i class="fa fa-star"></i>-->
+              <!--                                  <i class="fa fa-star"></i>-->
+              <!--                                  <i class="fa fa-star"></i>-->
+              <!--                                </p>-->
+              <!--              </div>-->
               <div class="row justify-content-center">
                 <div class="about-btn">
                   <button (click)="addToCart(tour)" type="button" class="about-view packages-btn">
@@ -205,7 +173,8 @@
                   </button>
                 </div>
                 <div class="about-btn">
-                  <button type="button" [routerLink]="['detail',tour.id]" style="margin-left: 10px" class="about-view packages-btn">
+                  <button type="button" [routerLink]="['detail',tour.id]" style="margin-left: 10px"
+                          class="about-view packages-btn">
                     Chi tiết
                   </button>
                 </div>

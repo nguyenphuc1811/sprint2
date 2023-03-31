@@ -1,5 +1,5 @@
 <header class="top-area" style="z-index: 10">
-  <div class="header-area">
+  <div class="header-area position-sticky">
     <div class="container">
       <div class="row">
         <div class="col-sm-2">
@@ -20,16 +20,29 @@
             </div><!-- /.navbar-header-->
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav navbar-right" style="display: inline-block">
-                <li class="smooth-menu"><a href="#home">Trang chủ</a></li>
+                <li class="smooth-menu"><a routerLink="/">Trang chủ</a></li>
                 <li class="smooth-menu"><a href="#gallery">Điểm đến</a></li>
                 <li class="smooth-menu"><a href="#pack">Gói</a></li>
-                <li class="smooth-menu"><a routerLink="/cart">Giỏ hàng</a></li>
+
+                <li *ngIf="isLogged == true" class="smooth-menu" style="max-height: 76px"><a style="height: 60px" routerLink="/cart"><i
+                  style="color: white;font-size: 18px; top: 5px; padding-bottom: 5px"
+                  class="fa-solid fa-cart-shopping"><span style="color: white;
+    background: #cb2027;
+    border-radius: 100%;
+    z-index: 99;
+    font-size: 15px;
+    padding: 5px 10px;
+    position: absolute;
+    top: -10px;
+    right: -20px;">{{tours.length}}</span></i>
+                </a></li>
                 <li class="smooth-menu" *ngIf="isLogged == false">
                   <button type="button" routerLink="/login" class="book-btn">Đăng nhập
                   </button>
                 </li>
-                <li  class="smooth-menu" style="display: inline-block" *ngIf="isLogged == true"><img src="{{user.avatar}}"
-                                                  style="width: 40px;height: 40px;border-radius: 50%;border: 1px solid #0F9E5E;margin-right: 10px">
+                <li class="smooth-menu" style="display: inline-block" *ngIf="isLogged == true"><img
+                  src="{{user.avatar}}"
+                  style="width: 40px;height: 40px;border-radius: 50%;border: 1px solid #0F9E5E;margin-right: 10px">
                   <a style="display:inline;padding-bottom: 31px" (click)="checkProfile()">{{user.name}}</a>
                 </li>
                 <li *ngIf="isLogged == true">

@@ -50,4 +50,9 @@ public class TourServiceImpl implements IToursService {
     public List<IToursDto> findAllByUser(int idUser) {
         return toursRepository.findAllByUser(idUser);
     }
+
+    @Override
+    public IToursDto findOneById(int id) {
+        return toursRepository.findOneById(id);
+    }
 }

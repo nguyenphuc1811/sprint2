@@ -14,18 +14,26 @@ export class BookingService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getListCart(id: number): Observable<any> {
+  getListCart(id: string): Observable<any> {
     return this.httpClient.get(this.URL + id);
-  }
-
-  deleteTours(id: number): Observable<any> {
-    return this.httpClient.delete(this.URL + id);
   }
 
   addBooking(tours: Tours, user: User): Observable<any> {
     let booking: Booking = {
-      user: user, tours: tours
+      user: {
+        id: user.id
+      }, tours: {
+        id: tours.id
+      }, bookingDate: '2023-11-11'
     }
     return this.httpClient.post(this.URL + "add", booking);
+  }
+
+  deleteCart(id: number): Observable<any> {
+    return this.httpClient.delete(this.URL + id);
+  }
+
+  updateCart(booking: Booking[]) {
+    return this.httpClient.put(this.URL + "update", booking);
   }
 }

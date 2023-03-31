@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "../../entity/user";
 import {LoginService} from "../../service/user/login.service";
 import {TokenService} from "../../service/user/token.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/user/share.service";
+import {Tours} from "../../entity/tours";
+import {BookingService} from "../../service/booking/booking.service";
 
 @Component({
   selector: 'app-header',
@@ -11,25 +13,31 @@ import {ShareService} from "../../service/user/share.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  user: User;
+  user: User = {
+    avatar: ''
+  };
   role = 'none';
   name = 'Đăng nhập'
   isLogged = false;
+  tours: Tours[] = [];
 
-  constructor(private login: LoginService, private token: TokenService, private router: Router, private share: ShareService) {
+  constructor(private login: LoginService, private bookingService: BookingService
+    , private token: TokenService, private router: Router
+    , private share: ShareService) {
   }
 
   ngOnInit(): void {
     this.loader();
     this.share.getClickEvent().subscribe(() => {
       this.loader();
+      this.getTours();
     })
   }
 
   loader() {
     this.isLogged = this.token.isLogger()
     if (this.isLogged) {
-      this.login.profile(this.token.getUsername()).subscribe(next => {
+      this.login.profile(this.token.getId()).subscribe(next => {
         this.user = next;
         this.name = this.user.name;
       })
@@ -59,4 +67,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['home', value])
   }
 
+  getTours() {
+    if (this.token.isLogger()) {
+      this.bookingService.getListCart(this.token.getId()).subscribe(data => {
+        this.tours = data;
+        console.log(this.tours.length);
+      })
+    }
+  }
 }

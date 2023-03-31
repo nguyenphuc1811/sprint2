@@ -16,4 +16,5 @@ public interface IToursDto {
     int getSlot();
     String getImg();
     int getRemaining();
+    int getLocationId();
 }
