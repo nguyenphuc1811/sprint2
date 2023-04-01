@@ -15,14 +15,16 @@ public class BookingServiceImpl implements IBookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
+    @Override
     public boolean addBooking(Booking booking) {
-        if (bookingRepository.existsByUserIdAndToursId(booking.getUser().getId(), booking.getTours().getId())) {
+        if (bookingRepository.existsByUserIdAndToursIdAndPaymentIsFalse(booking.getUser().getId(), booking.getTours().getId())) {
             return false;
         }
         bookingRepository.save(booking);
         return true;
     }
 
+    @Override
     public boolean removeBooking(int id) {
         if (getById(id) != null) {
             bookingRepository.deleteById(id);
@@ -31,6 +33,7 @@ public class BookingServiceImpl implements IBookingService {
         return false;
     }
 
+    @Override
     public Booking getById(int id) {
         return bookingRepository.findById(id).get();
     }
@@ -40,14 +43,24 @@ public class BookingServiceImpl implements IBookingService {
         bookingRepository.deleteByUserIdAndToursId(userId, toursId);
     }
 
+    @Override
     public List<Booking> findAllByPaymentAndUser(int id) {
         return bookingRepository.findAllByPaymentAndUserId(false, id);
     }
 
+    @Override
     public void saveQuantity(List<Booking> bookingList) {
         for (Booking booking : bookingList) {
             bookingRepository.updateBooking(
-                    booking.getSlot(), false,booking.getId());
+                    booking.getSlot(), false, booking.getId());
+        }
+    }
+
+    @Override
+    public void payment(List<Booking> bookingList) {
+        for (Booking booking : bookingList) {
+            bookingRepository.updateBooking(
+                    booking.getSlot(), true, booking.getId());
         }
     }
 }

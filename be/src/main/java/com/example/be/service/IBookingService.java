@@ -13,7 +13,10 @@ public interface IBookingService {
     Booking getById(int id);
 
     void deleteByUserIdAndToursId(int userId, int toursId);
-   
+
     List<Booking> findAllByPaymentAndUser(int id);
+
     void saveQuantity(List<Booking> bookingList);
+
+    void payment(List<Booking> bookingList);
 }

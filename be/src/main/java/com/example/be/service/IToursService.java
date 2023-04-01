@@ -9,9 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IToursService {
-    Page<Tours> getAll(Pageable pageable, int slot, String startDate);
-
-    Page<Tours> getAllByLocation(Pageable pageable, int slot, String startDate, int id);
 
     Page<IToursDto> getAllDto(Pageable pageable, int slot, String startDate);
 
@@ -22,5 +19,6 @@ public interface IToursService {
     Tours findById(int id);
 
     List<IToursDto> findAllByUser(int idUser);
-    IToursDto findOneById( int id);
+
+    IToursDto findOneById(int id);
 }

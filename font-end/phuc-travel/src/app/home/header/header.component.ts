@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {ShareService} from "../../service/user/share.service";
 import {Tours} from "../../entity/tours";
 import {BookingService} from "../../service/booking/booking.service";
+import {Booking} from "../../entity/booking";
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   role = 'none';
   name = 'Đăng nhập'
   isLogged = false;
-  tours: Tours[] = [];
+  booking: Booking[] = [];
 
   constructor(private login: LoginService, private bookingService: BookingService
     , private token: TokenService, private router: Router
@@ -70,8 +71,8 @@ export class HeaderComponent implements OnInit {
   getTours() {
     if (this.token.isLogger()) {
       this.bookingService.getListCart(this.token.getId()).subscribe(data => {
-        this.tours = data;
-        console.log(this.tours.length);
+        this.booking = data;
+        console.log(this.booking.length);
       })
     }
   }

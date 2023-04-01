@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ToursService} from "../../service/tours/tours.service";
 import {TokenService} from "../../service/user/token.service";
 import {NavigationEnd, Router} from "@angular/router";
@@ -8,6 +8,7 @@ import {Tours} from "../../entity/tours";
 import {ShareService} from "../../service/user/share.service";
 import {Booking} from "../../entity/booking";
 import {render} from 'creditcardpayments/creditCardPayments';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-cart',
@@ -18,6 +19,7 @@ export class CartComponent implements OnInit, OnDestroy {
   tours: Tours[];
   bookings: Booking[] = [];
   total = 0;
+  checkShow = false;
 
   constructor(private toursService: ToursService,
               private token: TokenService, private router: Router
@@ -25,28 +27,43 @@ export class CartComponent implements OnInit, OnDestroy {
               private login: LoginService,
               private share: ShareService) {
     this.getTours();
+  }
+
+  showRender() {
+    this.checkShow = true
+    let money = +(this.total / 23485.48).toFixed(2);
     render({
       id: "#paypal",
       currency: "USD",
-      value: "100.00",
+      value: String(money),
       onApprove: (details) => {
-        console.log(details)
-        alert("Thanh toán thành công")
+        this.bookingService.buyAll(this.bookings).subscribe(data => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Bạn đã đặt thành công, tổng số tiền là: ' + this.total + 'đ',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.share.sendClickEvent();
+          this.total = 0;
+          this.bookings = [];
+        });
       }
     })
   }
 
   ngOnInit(): void {
     this.share.getClickEvent();
-    window.scroll(0, 980)
+    window.scroll(0, 1000)
 
   }
 
 
   deleteTour(id: number) {
     this.bookingService.deleteCart(id).subscribe(data => {
-      this.share.sendClickEvent();
       this.getTours();
+      this.share.sendClickEvent();
     })
   }
 
@@ -58,6 +75,7 @@ export class CartComponent implements OnInit, OnDestroy {
   getTours() {
     if (this.token.isLogger()) {
       this.bookingService.getListCart(this.token.getId()).subscribe(data => {
+        this.bookings = [];
         for (let i = 0; i < data.length; i++) {
           this.bookings.push({
             id: data[i].id,
@@ -88,6 +106,7 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   getTotal() {
+    this.total = 0;
     for (let i = 0; i < this.bookings.length; i++) {
       this.total += this.bookings[i].slot * this.bookings[i].tours.price;
     }

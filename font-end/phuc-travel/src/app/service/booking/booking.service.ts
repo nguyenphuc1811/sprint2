@@ -24,7 +24,7 @@ export class BookingService {
         id: user.id
       }, tours: {
         id: tours.id
-      }, bookingDate: '2023-11-11'
+      }
     }
     return this.httpClient.post(this.URL + "add", booking);
   }
@@ -35,5 +35,9 @@ export class BookingService {
 
   updateCart(booking: Booking[]) {
     return this.httpClient.put(this.URL + "update", booking);
+  }
+
+  buyAll(booking: Booking[]) {
+    return this.httpClient.put(this.URL + "payment", booking);
   }
 }

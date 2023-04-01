@@ -1,0 +1,12 @@
+Trong câu truy vấn này, chúng ta sử dụng LEFT JOIN để kết hợp bảng "tours" và bảng "bookings". Sau đó, chúng ta sử dụng hàm COALESCE để đảm bảo rằng nếu không có booking nào thỏa mãn điều kiện "thanh_toan = false", thì giá trị trả về sẽ là 0.
+
+Chúng ta sử dụng CASE WHEN để kiểm tra xem trường "thanh_toan" có bằng false hay không, nếu đúng thì chúng ta lấy giá trị trong trường "quantity", ngược lại thì giá trị sẽ là 0.
+
+Cuối cùng, chúng ta sử dụng hàm SUM để tính tổng số lượng booking trong từng tour, và trừ từ số lượng tour ban đầu để tính số lượng còn lại. GROUP BY được sử dụng để nhóm các bản ghi theo "tour_id" để tính tổng số lượng booking của mỗi tour. Kết quả trả về bao gồm các trường "tour_id", "tour_name" và "remaining_quantity", với số lượng còn lại trong mỗi tour tính theo công thức "total_quantity - SUM(quantity) khi thanh_toan = true;
+ 
+-////////-//-/-/--/-/-/-
+
+SELECT t.id, t.slot - COALEbookingSCE(SUM(CASE WHEN b.payment = true THEN b.slot ELSE 0 END), 0) AS remaining_quantity
+FROM tours t
+LEFT JOIN booking b ON t.id = b.tours_id
+GROUP BY t.id;

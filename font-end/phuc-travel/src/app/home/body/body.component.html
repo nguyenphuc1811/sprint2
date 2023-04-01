@@ -40,8 +40,10 @@
                     <div class="col-lg-2 col-md-1 col-sm-4">
                       <div class="single-tab-select-box">
                         <h2>Số lượng</h2>
-                        <div class="travel-select-icon">
-                          <input class="form-control" type="text" #slot>
+                        <div class="">
+                          <input class="form-control" type="text"
+                                 style="height: 47px;width: 100px;text-align: center ;font-size: 20px;font-weight: 600"
+                                 #slot>
                         </div><!-- /.travel-select-icon -->
                       </div><!--/.single-tab-select-box-->
                     </div><!--/.col-->
@@ -140,20 +142,23 @@
                  src="{{tour.img}}"
                  alt="package-place">
             <div class="single-package-item-txt">
-              <h3>Huế<span class="pull-right"
-                           style="color: blue">{{tour.price | number}}<sup>đ</sup></span></h3>
+              <h3>{{tour.location}}<span class="pull-right"
+                                         style="color: blue">{{tour.price | number}}<sup>đ</sup></span></h3>
               <!--              <span class="pull-right"-->
               <!--                    style="color: gray; font-size: 16px;text-decoration: line-through;">{{tour.price * 1.1 | number}}<sup>đ</sup></span>-->
               <div class="packages-para">
                 <ul>
                   <li>
-                    <span><i class="fa fa-angle-right"></i>{{tour.schedule | slice: 0:60}}<span
+                    <span><i class="fa fa-angle-right"></i> &nbsp;{{tour.schedule | slice: 0:60}}<span
                       *ngIf="tour.schedule.length > 60">...</span></span>
                   </li>
-                  <li><span style="color: blue;">Số chỗ còn nhận :</span> <span
+                  <li><span style="color: blue;">Số chỗ còn nhận : &nbsp;</span> <span
                     style="color: red">{{tour.remaining}}</span></li>
-                  <li><span style="color: blue;">Nơi khởi hành:</span> <span
-                    style="color: red">{{tour.location}}</span>
+                  <li><span style="color: blue;">Ngày xuất phát: &nbsp; </span> <span
+                    style="color: red">{{tour.startDate}}</span>
+                  </li>
+                  <li><span style="color: blue;">Ngày kết thúc: &nbsp; </span> <span
+                    style="color: red">{{tour.endDate}}</span>
                   </li>
                 </ul>
               </div>

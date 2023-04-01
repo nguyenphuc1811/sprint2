@@ -7,6 +7,20 @@
             <div class="col-lg-8 px-5 py-4">
               <h3 class="text-center fw-bold text-uppercase" style="margin-top: 2px; padding-bottom: 5px">Chuyến đi</h3>
               <div style="overflow: auto; height: 450px">
+                <div class="col-md-12" *ngIf="bookings.length == 0">
+                  <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body cart">
+                      <div class="col-sm-12 empty-cart-cls text-center">
+                        <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>Giỏ hàng của bạn đang trống</strong></h3>
+                        <a routerLink="/" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tìm kiếm tour
+                          mới</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div style="display: flex;border: 2px solid #005ec4; padding: 10px;margin-bottom: 10px"
                      *ngFor="let booking of bookings;index as i">
                   <div class="flex-shrink-0">
@@ -62,47 +76,38 @@
                   </div>
                 </div>
               </div>
-              <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
-              <div class="" style="background-color: #e1f5fe; padding: 5px">
-                <h3 class="fw-bold mb-0" style="justify-content: space-between">Tổng tiền: <span>{{total | number}}<sup>đ</sup></span>
-                </h3>
-              </div>
             </div>
             <div class="col-lg-4 px-5 py-4">
               <h3 class="text-center fw-bold text-uppercase" style="margin-top: 2px; padding-bottom: 5px">Thanh
                 toán</h3>
-              <!--              <div class="form-outline mb-5">-->
-              <!--                <input type="text" id="typeText1" class="form-control form-control-lg" siez="17" minlength="19"-->
-              <!--                       maxlength="19"/>-->
-              <!--                <label class="form-label" for="typeText1">Số thẻ</label>-->
-              <!--              </div>-->
-
-              <!--              <div class="form-outline mb-5">-->
-              <!--                <input type="text" id="typeName" class="form-control form-control-lg" size="17"-->
-              <!--                />-->
-              <!--                <label class="form-label" for="typeName">Tên chủ thẻ</label>-->
-              <!--              </div>-->
-              <!--              <div class="row">-->
-              <!--                <div class="col-md-6 mb-5">-->
-              <!--                  <div class="form-outline">-->
-              <!--                    <input type="text" id="typeExp" class="form-control form-control-lg"-->
-              <!--                           size="7" id="exp" minlength="7" maxlength="7"/>-->
-              <!--                    <label class="form-label" for="typeExp">Hạn thẻ</label>-->
-              <!--                  </div>-->
-              <!--                </div>-->
-              <!--                <div class="col-md-6 mb-5">-->
-              <!--                  <div class="form-outline">-->
-              <!--                    <input type="password" id="typeText" class="form-control form-control-lg"-->
-              <!--                           size="1" minlength="3" maxlength="3"/>-->
-              <!--                    <label class="form-label" for="typeText">Mã số bảo mật</label>-->
-              <!--                  </div>-->
-              <!--                </div>-->
-              <!--              </div>-->
-              <div id="paypal" style="margin-top: 10px"></div>
+              <article class="card">
+                <div class="" style="background-color: #e1f5fe; padding: 5px">
+                  <h3 class="fw-bold mb-0" style="justify-content: space-between">Tổng tiền: <span
+                    class="text-danger">{{total | number}}
+                    <sup>đ</sup></span>
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex gap-2 mb-2">
+                    <button style="height: 30px; font-size: 14px; margin-right: 5px" class="btn w-100 btn-success"
+                            *ngIf="!checkShow"
+                            (click)="showRender()"
+                            type="button">
+                      Thanh toán
+                    </button>
+                    <button routerLink="/" style="height: 30px;  font-size: 14px" class="btn w-100 btn-primary"
+                            type="button">
+                      Xem thêm tour
+                    </button>
+                  </div>
+                  <div id="paypal" style="margin-top: 10px"></div>
+                </div>
+              </article>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>

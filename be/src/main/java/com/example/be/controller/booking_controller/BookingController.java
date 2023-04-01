@@ -1,7 +1,6 @@
 package com.example.be.controller.booking_controller;
 
 import com.example.be.dto.tours.BookingDto;
-import com.example.be.dto.tours.IToursDto;
 import com.example.be.model.tours.Booking;
 import com.example.be.service.IBookingService;
 import com.example.be.service.IToursService;
@@ -12,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,17 +50,34 @@ public class BookingController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+
     @PostMapping("add")
     public ResponseEntity<?> addBookingToCart(@RequestBody Booking booking) {
+        String date = String.valueOf(LocalDate.now());
+        booking.setBookingDate(date);
         if (bookingService.addBooking(booking)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("update")
     public ResponseEntity<?> updateQuantityBooking(@RequestBody List<Booking> bookingList) {
-        bookingService.saveQuantity(bookingList);
+        try {
+            bookingService.saveQuantity(bookingList);
+        } catch (NullPointerException ignored) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("payment")
+    public ResponseEntity<?> paymentTour(@RequestBody List<Booking> bookingList) {
+        try {
+            bookingService.payment(bookingList);
+        } catch (NullPointerException ignored) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

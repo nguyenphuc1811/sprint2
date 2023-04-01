@@ -25,22 +25,6 @@ public class HomeController {
     @Autowired
     private ILocationService locationService;
 
-    @GetMapping("tours")
-    public ResponseEntity<?> getTours(@PageableDefault(size = 6) Pageable pageable,
-                                      @RequestParam(name = "locationId", defaultValue = "0") int id,
-                                      @RequestParam(name = "startDate", defaultValue = "") String startDate,
-                                      @RequestParam(name = "slot", defaultValue = "0") int slot) {
-        try {
-            new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
-        } catch (ParseException e) {
-            startDate = "1999-11-18";
-        }
-        if (id == 0) {
-            return new ResponseEntity<>(toursService.getAll(pageable, slot, startDate), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(toursService.getAllByLocation(pageable, slot, startDate, id), HttpStatus.OK);
-    }
-
     @GetMapping("toursDto")
     public ResponseEntity<?> getToursDto(@PageableDefault(size = 6) Pageable pageable,
                                          @RequestParam(name = "locationId", defaultValue = "0") int id,

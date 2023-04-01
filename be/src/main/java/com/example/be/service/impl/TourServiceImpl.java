@@ -17,16 +17,6 @@ public class TourServiceImpl implements IToursService {
     public ToursRepository toursRepository;
 
     @Override
-    public Page<Tours> getAll(Pageable pageable, int slot, String startDate) {
-        return toursRepository.getAll(pageable, slot, startDate);
-    }
-
-    @Override
-    public Page<Tours> getAllByLocation(Pageable pageable, int slot, String startDate, int id) {
-        return toursRepository.getAllByLocation(pageable, slot, startDate, id);
-    }
-
-    @Override
     public Page<IToursDto> getAllDto(Pageable pageable, int slot, String startDate) {
         return toursRepository.getAllDto(pageable, slot, startDate);
     }

@@ -45,7 +45,12 @@ export class BodyComponent implements OnInit {
     this.toursService.getLocation().subscribe(data => {
       this.locations = data;
     })
-    this.searchTours(this.id, this.startDate, this.slot);
+    this.toursService.getTours(this.id, this.startDate, this.slot, this.page).subscribe(
+      data => {
+        this.tours = data.content;
+        this.last = data.last;
+      }
+    )
     if (this.token.isLogger()) {
       this.login.profile(this.token.getId()).subscribe(user => {
         this.user = user;
@@ -61,6 +66,7 @@ export class BodyComponent implements OnInit {
     this.id = id;
     this.startDate = startDate;
     this.slot = slot;
+    window.scroll(0, 2000)
     this.toursService.getTours(this.id, this.startDate, this.slot, this.page).subscribe(
       data => {
         this.tours = data.content;
