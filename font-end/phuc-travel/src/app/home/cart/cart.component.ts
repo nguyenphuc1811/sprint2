@@ -16,10 +16,11 @@ import Swal from "sweetalert2";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit, OnDestroy {
-  tours: Tours[];
   bookings: Booking[] = [];
   total = 0;
   checkShow = false;
+  tourError: Tours[] = [];
+
 
   constructor(private toursService: ToursService,
               private token: TokenService, private router: Router
@@ -30,27 +31,40 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   showRender() {
-    this.checkShow = true
-    let money = +(this.total / 23485.48).toFixed(2);
-    render({
-      id: "#paypal",
-      currency: "USD",
-      value: String(money),
-      onApprove: (details) => {
-        this.bookingService.buyAll(this.bookings).subscribe(data => {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Bạn đã đặt thành công, tổng số tiền là: ' + this.total + 'đ',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          this.share.sendClickEvent();
-          this.total = 0;
-          this.bookings = [];
-        });
-      }
-    })
+    if(this.bookings.length != 0){
+    this.bookingService.checkBooking(this.bookings).subscribe(data => {
+      let money = +(this.total / 23485.48).toFixed(2);
+      this.checkShow = true
+      render({
+        id: "#paypal",
+        currency: "USD",
+        value: String(money),
+        onApprove: (details) => {
+          if (details.status == 'COMPLETED') {
+            this.bookingService.buyAll(this.bookings).subscribe(data => {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Bạn đã đặt thành công, tổng số tiền là: ' + this.total + 'đ',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              this.share.sendClickEvent();
+              this.total = 0;
+              this.getTours();
+            }, error => {
+              this.tourError = error.error;
+              document.getElementById('button').click();
+            });
+          }
+        }
+      })
+    }, error => {
+      this.tourError = error.error;
+      document.getElementById('button').click();
+    })}else {
+      alert("Giỏ hàng của bạn đang trống, vui lòng thêm để thanh toán");
+    }
   }
 
   ngOnInit(): void {
@@ -81,7 +95,7 @@ export class CartComponent implements OnInit, OnDestroy {
             id: data[i].id,
             slot: data[i].slot,
             tours: {
-              id: data[i].id,
+              id: data[i].iToursDto.id,
               schedule: data[i].iToursDto.schedule,
               startDate: data[i].iToursDto.startDate,
               endDate: data[i].iToursDto.endDate,
@@ -96,6 +110,7 @@ export class CartComponent implements OnInit, OnDestroy {
             }
           })
         }
+        console.log(this.bookings)
         this.getTotal()
       })
     }

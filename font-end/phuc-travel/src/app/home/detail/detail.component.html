@@ -1,41 +1,90 @@
-<div class="card-wrapper">
-  <div class="card" style="padding: 10px 50px;">
-    <div class="product-imgs">
-      <div class="img-display">
-        <div class="img-showcase">
-          <img src="{{tour.img}}">
+<main class="pt-4" style="border: 20px solid black">
+  <div class="container mt-5">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-md-6 mb-4">
+        <img src="{{tour.img}}" class="img-fluid" alt="" />
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-6 mb-4">
+        <!--Content-->
+        <div class="p-4">
+          <div class="mb-3">
+            <a href="">
+              <span class="badge bg-dark me-1">Category 2</span>
+            </a>
+            <a href="">
+              <span class="badge bg-info me-1">New</span>
+            </a>
+            <a href="">
+              <span class="badge bg-danger me-1">Bestseller</span>
+            </a>
+          </div>
+
+          <p class="lead" style="font-size: 18px">
+                        <span class="me-1">
+                          <del>{{tour.price * 1.2 | number}}<sup>đ</sup></del>
+                        </span>
+            <span  class="text-danger" style="margin-left: 10px">{{tour.price | number}}<sup>đ</sup>/ 1 vé</span>
+          </p>
+          <strong><p style="font-size: 20px;">Thông tin:</p></strong>
+          <ul style="font-size: 16px">
+            <li>Địa điểm: <span>{{tour.location}}</span></li>
+            <li>Lịch trình: <span>{{tour.schedule}}</span></li>
+            <li>Ngày khởi hành: <span>{{tour.startDate | date: 'dd/MM/yyyy'}}</span></li>
+            <li>Ngày khởi hành: <span>{{tour.endDate | date: 'dd/MM/yyyy'}}</span></li>
+            <li>Số lượng còn lại: <span>{{tour.remaining}}</span></li>
+            <li>Chi tiết: <span>{{tour.description}}</span></li>
+          </ul>
+          <div class="d-flex justify-content-left">
+            <!-- Default input -->
+            <div class="form-outline me-1" style="width: 100px;">
+              <input #slot type="number" value="0" min="0" class="form-control" />
+            </div>
+            <button (click)="addToCart(tour,slot.value)" class="btn btn-primary ms-1" type="button">
+              Thêm vào giỏ
+              <i class="fas fa-shopping-cart ms-1"></i>
+            </button>
+          </div>
         </div>
+        <!--Content-->
       </div>
+      <!--Grid column-->
     </div>
-    <!-- card right -->
-    <div class="product-content">
-      <h3 class="product-title">{{tour.name}}</h3>
-      <div class="product-price">
-        <p class="last-price">Giá gốc:<span style="margin-left: 5px">{{tour.price * 1.1 | number}}<sup>đ</sup></span>
-        </p>
-        <p class="new-price">Giá mới: <span>{{tour.price | number}}<sup>đ</sup></span></p>
-      </div>
+    <!--Grid row-->
+    <hr />
+    <!--Grid row-->
+<!--    <div class="row d-flex justify-content-center">-->
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--      <div class="col-md-6 text-center">-->
+<!--        <h4 class="my-4 h4">Additional information</h4>-->
 
-      <div class="product-detail">
-        <h2>Thông tin chuyến đi: </h2>
-        <h4>{{tour.schedule}}</h4>
-        <ul>
-          <li>Thời gian: <span>5 ngày 6 đêm</span></li>
-          <li>Nơi khởi hành: <span>{{tour.location.name}}</span></li>
-          <!--          <li>Khách sạn: <span>Furama</span></li>-->
-          <!--          <li>Người hướng dẫn: <span>Phúc đẹp trai</span></li>-->
-          <li>Thông tin chi tiết: <span>{{tour.description}}</span></li>
-          <li>Số lượng còn lại: <span class="text-danger">{{tour.remaining}}</span></li>
-        </ul>
-      </div>
+<!--        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit voluptates, quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--      <div class="col-lg-4 col-md-12 mb-4">-->
+<!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="" />-->
+<!--      </div>-->
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
 
-      <div class="purchase-info">
-        <input type="number" value="1">
-        <button type="button" (click)="addToCart(tour)" class="btn">
-          Thêm vào giỏ <i class="fa fa-shopping-cart"></i>
-        </button>
-        <button routerLink="/" type="button" class="btn">Trở về</button>
-      </div>
-    </div>
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--      <div class="col-lg-4 col-md-6 mb-4">-->
+<!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="" />-->
+<!--      </div>-->
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--      <div class="col-lg-4 col-md-6 mb-4">-->
+<!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="" />-->
+<!--      </div>-->
+<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--    </div>-->
+    <!--Grid row-->
   </div>
-</div>
+</main>

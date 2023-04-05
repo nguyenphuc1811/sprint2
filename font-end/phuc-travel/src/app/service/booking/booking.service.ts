@@ -18,6 +18,10 @@ export class BookingService {
     return this.httpClient.get(this.URL + id);
   }
 
+  getDetailCart(id: string, page :number): Observable<any> {
+    return this.httpClient.get(this.URL + 'detail/' + id + '?page=' + page );
+  }
+
   addBooking(tours: Tours, user: User): Observable<any> {
     let booking: Booking = {
       user: {
@@ -25,6 +29,18 @@ export class BookingService {
       }, tours: {
         id: tours.id
       }
+    }
+    return this.httpClient.post(this.URL + "add", booking);
+  }
+
+  addBookingAndSlot(tours: Tours, user: User, slot: string): Observable<any> {
+    let booking: Booking = {
+      user: {
+        id: user.id
+      }, tours: {
+        id: tours.id
+      },
+      slot: parseInt(slot)
     }
     return this.httpClient.post(this.URL + "add", booking);
   }
@@ -39,5 +55,9 @@ export class BookingService {
 
   buyAll(booking: Booking[]) {
     return this.httpClient.put(this.URL + "payment", booking);
+  }
+
+  checkBooking(booking: Booking[]) {
+    return this.httpClient.post(this.URL + "payment", booking);
   }
 }

@@ -1,7 +1,5 @@
 package com.example.be.dto.tours;
 
-import com.example.be.model.tours.TourGuide;
-
 public interface IToursDto {
     Integer getId();
     String getDescription();
@@ -11,7 +9,6 @@ public interface IToursDto {
     String getStartDate();
     String getEndDate();
     Double getPrice();
-    TourGuide getTourGuide();
     Double getCost();
     int getSlot();
     String getImg();

@@ -1,11 +1,8 @@
 package com.example.be.controller;
 
-import com.example.be.dto.tours.IToursDto;
-import com.example.be.model.tours.Tours;
 import com.example.be.service.ILocationService;
 import com.example.be.service.IToursService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -48,9 +45,9 @@ public class HomeController {
 
     @GetMapping("detail")
     public ResponseEntity<?> findByIdTour(@RequestParam(name = "id") int id) {
-        if (toursService.findById(id) == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (toursService.findByIdDto(id) == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(toursService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(toursService.findByIdDto(id), HttpStatus.OK);
     }
 }

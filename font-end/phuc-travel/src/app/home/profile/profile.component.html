@@ -1,241 +1,345 @@
-<div class="container emp-profile" style="margin-top: 78px;">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="profile-img">
-        <img src="{{user.avatar}}" alt="" style="width: 250px;height: 250px"/>
+<!--<div class="container emp-profile" style="margin-top: 78px;">-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-4">-->
+<!--      <div class="profile-img">-->
+<!--        <img src="{{user.avatar}}" alt="" style="width: 250px;height: 250px"/>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-6" >-->
+<!--      <div class="profile-head">-->
+
+<!--        <h5>-->
+<!--          {{user.name}}-->
+<!--        </h5>-->
+
+<!--        <ul class="nav nav-tabs" id="myTab" role="tablist">-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"-->
+<!--               aria-selected="true">Giới thiệu</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"-->
+<!--               aria-selected="false">Cá nhân</a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-2">-->
+<!--      <input type="submit" data-toggle="modal" data-target="#staticBackdrop" class="profile-edit-btn" name="btnAddMore"-->
+<!--             value="Chỉnh Sửa"/>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--  <div class="row" style="margin-top: -130px">-->
+<!--    <div class="col-md-4">-->
+<!--      <div class="profile-work">-->
+<!--        <p></p>-->
+<!--        <a href=""></a><br/>-->
+<!--        <a href=""></a><br/>-->
+<!--        <a href=""></a>-->
+<!--        <p></p>-->
+<!--        <a href=""></a><br/>-->
+<!--        <a href=""></a><br/>-->
+<!--        <a href=""></a><br/>-->
+<!--        <a href=""></a><br/>-->
+<!--        <a href=""></a><br/>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-8" >-->
+<!--      <div class="tab-content profile-tab" id="myTabContent">-->
+<!--        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">-->
+
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Họ Và Tên</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <p>{{user.name}}</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Email</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <p>{{user.email}}</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Số Điện Thoại</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <p>{{user.phoneNumber}}</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Địa Chỉ</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <p>{{user.address}}</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Ngày Sinh</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <p>{{user.dateOfBirth | date: 'dd/MM/yyyy'}}</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Giới Tính</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <p *ngIf="user.gender == true">Nam</p>-->
+<!--              <p *ngIf="user.gender == false">Nữ</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Tuổi</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <p>{{user.age}}</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"-->
+<!--     aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-xl">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa thông tin</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <form [formGroup]="form" (ngSubmit)="update()">-->
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Họ Và Tên:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--              <input type="text" class="form-control" formControlName="name">-->
+<!--              <span class="text-danger">{{nameError}}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Số Điện Thoại:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--              <input type="text" class="form-control" formControlName="phoneNumber">-->
+<!--              <span class="text-danger">{{phoneNumberError}}</span>-->
+
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Giới tính:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--              <input type="radio" [value]="true" class="form-radio" formControlName="gender"> Nam-->
+<!--              <input type="radio" [value]="false" class="form-radio" formControlName="gender"> Nữ-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Email:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--              <input type="email" class="form-control" formControlName="email">-->
+<!--              <span class="text-danger">{{emailError}}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Địa chỉ:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--              <input type="text" class="form-control" formControlName="address">-->
+<!--              <span class="text-danger">{{addressError}}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Ngày Sinh:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--              <input type="date" class="form-control" formControlName="dateOfBirth">-->
+<!--              <span class="text-danger">{{dateOfBirthError}}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Ảnh Đại Diện:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--&lt;!&ndash;              <input type="file"  (change)="showPreview($event)">&ndash;&gt;-->
+<!--              <input style="display:none;" formControlName="avatar"> <br> <br>-->
+<!--              <img style="width: 90px" [src]="user.avatar">-->
+<!--              <span class="text-danger">{{avatarError}}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="mb-3 row">-->
+<!--            <label class="col-sm-2 col-form-label">Đổi Mật Khẩu:<span style="color: red">(*):</span></label>-->
+<!--            <div class="col-sm-10">-->
+<!--              <button class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop2"-->
+<!--                      type="button">+-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="modal-footer">-->
+<!--            <button type="button" id="dismiss" class="btn btn-secondary" data-dismiss="modal">Hủy</button>-->
+<!--            <button type="submit" class="btn btn-primary">Xác Nhận</button>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>x-->
+<!--<div class="modal fade" id="staticBackdrop2" style="top: 100px" data-backdrop="static" data-keyboard="false" tabindex="-1"-->
+<!--     aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-xl">-->
+<!--    <div class="modal-dialog modal-lg" style="background: antiquewhite">-->
+
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title" id="staticBackdropLabel2">Cập nhật mật khẩu</h5>-->
+<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--            <span aria-hidden="true">&times;</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <form [formGroup]="formPassword" (ngSubmit)="changePassword()">-->
+<!--            <div class="mb-3 row">-->
+<!--              <label class="col-sm-2 col-form-label">Mật khẩu cũ</label>-->
+<!--              <div class="col-sm-10">-->
+<!--                <input type="password" class="form-control" formControlName="password">-->
+<!--                <span class="text-danger">{{passwordError}}</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="mb-3 row">-->
+<!--              <label class="col-sm-2 col-form-label">Mật khẩu mới</label>-->
+<!--              <div class="col-sm-10">-->
+<!--                <input type="password" class="form-control" formControlName="newPassword">-->
+<!--                <span class="text-danger">{{newPasswordError}}</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="mb-3 row">-->
+<!--              <label class="col-sm-2 col-form-label">Mật khẩu xác nhận</label>-->
+<!--              <div class="col-sm-10">-->
+<!--                <input type="password" class="form-control" formControlName="confirmPassword">-->
+<!--                <span class="text-danger">{{confirmPasswordError}}</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--              <button type="button" id="dismiss2" class="btn btn-secondary" data-dismiss="modal">Hủy</button>-->
+<!--              <button type="submit" class="btn btn-primary">Xác Nhận</button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="container">
+  <div class="profile-header">
+    <div class="profile-img">
+      <img src="{{user.avatar}}" width="200" alt="Profile Image">
+    </div>
+    <div class="profile-nav-info">
+      <h2 class="">{{user.name}}</h2>
+      <div class="address">
+        <p id="state" class="state">{{user.address}}</p>
+        <span id="country" class="country">Việt Nam.</span>
+      </div>
+
+    </div>
+    <div class="profile-option">
+      <div class="notification">
+        <i class="fa fa-bell"></i>
+        <span class="alert-message">3</span>
       </div>
     </div>
-    <div class="col-md-6" >
-      <div class="profile-head">
-
-        <h5>
-          {{user.name}}
-        </h5>
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-               aria-selected="true">Giới thiệu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-               aria-selected="false">Cá nhân</a>
-          </li>
+  </div>
+  <div class="main-bd">
+    <div class="left-side">
+      <div class="profile-side">
+        <p class="mobile-no"><i class="fa fa-phone"></i> +{{user.phoneNumber | slice: 0: 2}}
+          XXXXX{{user.phoneNumber | slice: 8 }}</p>
+        <p class="user-mail"><i class="fa fa-envelope"></i>{{user.email}}</p>
+        <p class="user-mail"><i class="fa-solid fa-face-smile"></i>18</p>
+        <p class="user-mail"><i class="fa-solid fa-venus-mars"></i>
+          <span *ngIf="user.gender == true">Nam</span>
+          <span *ngIf="user.gender == false">Nữ</span></p>
+        <p class="user-mail"><i class="fa-solid fa-cake-candles"></i>{{user.dateOfBirth}}</p>
+      </div>
+    </div>
+    <div class="right-side" style="width: 100%">
+      <div class="nav">
+        <ul>
+          <li (click)="choicePage(0)" [class.active]="choice ==0" class="user-post">Lịch sử đặt</li>
+          <li (click)="choicePage(1)" [class.active]="choice ==1" class="user-review">Chỉnh sửa thông tin cá nhân</li>
+          <li (click)="choicePage(2)" [class.active]="choice ==2" class="user-setting"> Settings</li>
         </ul>
       </div>
-    </div>
-    <div class="col-md-2">
-      <input type="submit" data-toggle="modal" data-target="#staticBackdrop" class="profile-edit-btn" name="btnAddMore"
-             value="Chỉnh Sửa"/>
-    </div>
-
-  </div>
-  <div class="row" style="margin-top: -130px">
-    <div class="col-md-4">
-      <div class="profile-work">
-        <p></p>
-        <a href=""></a><br/>
-        <a href=""></a><br/>
-        <a href=""></a>
-        <p></p>
-        <a href=""></a><br/>
-        <a href=""></a><br/>
-        <a href=""></a><br/>
-        <a href=""></a><br/>
-        <a href=""></a><br/>
-      </div>
-    </div>
-    <div class="col-md-8" >
-      <div class="tab-content profile-tab" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-          <div class="row">
-            <div class="col-md-6">
-              <label>Họ Và Tên</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{user.name}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Email</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{user.email}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Số Điện Thoại</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{user.phoneNumber}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Địa Chỉ</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{user.address}}</p>
-            </div>
+      <div class="profile-body">
+        <div *ngIf="choice == 0">
+          <table class="table-text table table-hover" style="height: 375px">
+            <thead>
+            <tr style="background: #005ec4;color: white" class="text3">
+              <th>STT</th>
+              <th>Tour</th>
+              <th>Ngày mua</th>
+              <th>Số lượng</th>
+              <th>Giá</th>
+              <th>Tổng tiền</th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+            <tr *ngFor="let x of bookings;index as i">
+              <td>{{i + 1}}</td>
+              <td><img src="{{x.tours.img}}"
+                       style="width: 50px;height: 50px;object-fit: cover;border: 1px solid #005ec4">
+              </td>
+              <td>{{x.bookingDate | date: 'dd/MM/yyyy, h:mm:ss a'}}</td>
+              <td class="text-center">{{x.slot}}</td>
+              <td class="text-center">{{x.tours.price | number}}đ</td>
+              <td class="text-center">{{x.tours.price * x.slot | number}}đ</td>
+            </tr>
+            </tbody>
+          </table>
+          <div style="margin-left: 375px;margin-top: -10px">
+            <button class="btn btn-outline-primary" [disabled]="first == true" (click)="getHistory(number -1)"
+                    style="border-radius: 0;margin: 10px"><i style="margin-right: 8px"
+                                                             class="fa-solid fa-circle-chevron-left"></i> <span class="text2">Trang trước</span>
+            </button>
+            <button class="btn btn-outline-primary" style="border-radius: 0;"><span class="text2">{{number + 1}}</span></button>
+            <button class="btn btn-outline-primary" [disabled]="last == true" (click)="getHistory(number +1)"
+                    style="border-radius: 0;margin: 10px"><span class="text2" style="margin-right: 8px">Trang sau</span> <i
+              class="fa-solid fa-circle-chevron-right"></i></button>
           </div>
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div class="row">
-            <div class="col-md-6">
-              <label>Ngày Sinh</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{user.dateOfBirth | date: 'dd/MM/yyyy'}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Giới Tính</label>
-            </div>
-            <div class="col-md-6">
-              <p *ngIf="user.gender == true">Nam</p>
-              <p *ngIf="user.gender == false">Nữ</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Tuổi</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{user.age}}</p>
-            </div>
-          </div>
+        <div *ngIf="choice == 1">
+          <h1>User reviews</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam pariatur officia, aperiam quidem quasi,
+            tenetur molestiae. Architecto mollitia laborum possimus iste esse. Perferendis tempora consectetur, quae qui
+            nihil voluptas. Maiores debitis
+            repellendus excepturi quisquam temporibus quam nobis voluptatem, reiciendis distinctio deserunt vitae!
+            Maxime provident, distinctio animi commodi nemo, eveniet fugit porro quos nesciunt quidem a, corporis nisi
+            dolorum minus sit eaque error
+            sequi ullam. Quidem ut fugiat, praesentium velit aliquam!</p>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa thông tin</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="form" (ngSubmit)="update()">
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Họ Và Tên:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="name">
-              <span class="text-danger">{{nameError}}</span>
-            </div>
+        <div *ngIf="choice == 2">
+          <div class="account-setting">
+            <h1>Acount Setting</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit omnis eaque, expedita nostrum,
+              facere libero provident laudantium. Quis, hic doloribus! Laboriosam nemo tempora praesentium. Culpa quo
+              velit omnis, debitis maxime, sequi
+              animi dolores commodi odio placeat, magnam, cupiditate facilis impedit veniam? Soluta aliquam excepturi
+              illum natus adipisci ipsum quo, voluptatem, nemo, commodi, molestiae doloribus magni et. Cum, saepe enim
+              quam voluptatum vel debitis
+              nihil, recusandae, omnis officiis tenetur, ullam rerum.</p>
           </div>
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Số Điện Thoại:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="phoneNumber">
-              <span class="text-danger">{{phoneNumberError}}</span>
-
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Giới tính:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-              <input type="radio" [value]="true" class="form-radio" formControlName="gender"> Nam
-              <input type="radio" [value]="false" class="form-radio" formControlName="gender"> Nữ
-            </div>
-          </div>
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Email:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" formControlName="email">
-              <span class="text-danger">{{emailError}}</span>
-            </div>
-          </div>
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Địa chỉ:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="address">
-              <span class="text-danger">{{addressError}}</span>
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Ngày Sinh:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" formControlName="dateOfBirth">
-              <span class="text-danger">{{dateOfBirthError}}</span>
-            </div>
-          </div>
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Ảnh Đại Diện:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-<!--              <input type="file"  (change)="showPreview($event)">-->
-              <input style="display:none;" formControlName="avatar"> <br> <br>
-              <img style="width: 90px" [src]="user.avatar">
-              <span class="text-danger">{{avatarError}}</span>
-            </div>
-          </div>
-          <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Đổi Mật Khẩu:<span style="color: red">(*):</span></label>
-            <div class="col-sm-10">
-              <button class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop2"
-                      type="button">+
-              </button>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="dismiss" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-            <button type="submit" class="btn btn-primary">Xác Nhận</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>x
-<div class="modal fade" id="staticBackdrop2" style="top: 100px" data-backdrop="static" data-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-dialog modal-lg" style="background: antiquewhite">
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel2">Cập nhật mật khẩu</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="formPassword" (ngSubmit)="changePassword()">
-            <div class="mb-3 row">
-              <label class="col-sm-2 col-form-label">Mật khẩu cũ</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" formControlName="password">
-                <span class="text-danger">{{passwordError}}</span>
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label class="col-sm-2 col-form-label">Mật khẩu mới</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" formControlName="newPassword">
-                <span class="text-danger">{{newPasswordError}}</span>
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label class="col-sm-2 col-form-label">Mật khẩu xác nhận</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" formControlName="confirmPassword">
-                <span class="text-danger">{{confirmPasswordError}}</span>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="dismiss2" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-              <button type="submit" class="btn btn-primary">Xác Nhận</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>

@@ -1,113 +1,172 @@
-<section class="h-custom" style="background-color: #F0E68C;">
-  <div class="container py-5">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="card shopping-cart" style="border-radius: 15px; width: 100%;">
-        <div class="card-body text-black" style="width: 100%; min-height: 600px">
-          <div class="row">
-            <div class="col-lg-8 px-5 py-4">
-              <h3 class="text-center fw-bold text-uppercase" style="margin-top: 2px; padding-bottom: 5px">Chuyến đi</h3>
-              <div style="overflow: auto; height: 450px">
-                <div class="col-md-12" *ngIf="bookings.length == 0">
-                  <div class="card">
-                    <div class="card-header">
+<section class="bg-light my-5">
+  <div class="container" style="margin-bottom:  0 ">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card border shadow-0">
+          <div class="m-4">
+            <h4 class="card-title mb-4">Giỏ hàng của bạn</h4>
+            <div style="overflow: auto; height: 350px">
+              <div class="col-lg-12" *ngIf="bookings.length == 0">
+                <div class="card">
+                  <div class="card-header">
+                  </div>
+                  <div class="card-body cart">
+                    <div class="col-sm-12 empty-cart-cls text-center">
+                      <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                      <h3><strong>Giỏ hàng của bạn đang trống</strong></h3>
+                      <a routerLink="/" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tìm kiếm tour
+                        mới</a>
                     </div>
-                    <div class="card-body cart">
-                      <div class="col-sm-12 empty-cart-cls text-center">
-                        <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
-                        <h3><strong>Giỏ hàng của bạn đang trống</strong></h3>
-                        <a routerLink="/" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tìm kiếm tour
-                          mới</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row gy-3" *ngFor="let booking of bookings; index as i">
+                <div class="col-lg-8">
+                  <div class="me-lg-5">
+                    <div class="d-flex">
+                      <img [src]="booking.tours.img"
+                           class="border rounded me-3" style="width: 128px; height: 128px;"/>
+                      <div style="margin-left: 5px">
+                        <p>Lịch trình: &nbsp; <span
+                          style="color: #00d8d5">{{booking.tours.schedule | slice: 0: 30}}<span
+                          *ngIf="booking.tours.schedule.length >30">...</span> </span></p>
+
+                        <p>Ngày khởi hành: &nbsp; <span
+                          style="color: #00d8d5">{{booking.tours.startDate | date: 'dd/MM/yyyy'}}</span></p>
+
+                        <p>Ngày kết thúc: &nbsp; <span
+                          style="color: #00d8d5">{{booking.tours.endDate | date: 'dd/MM/yyyy' }}</span></p>
+
+                        <p> Số lượng còn lại: &nbsp; <span style="color: #00d8d5">{{booking.tours.remaining}}</span></p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div style="display: flex;border: 2px solid #005ec4; padding: 10px;margin-bottom: 10px"
-                     *ngFor="let booking of bookings;index as i">
-                  <div class="flex-shrink-0">
-                    <img src="{{booking.tours.img}}"
-                         class="img-fluid" style="width: 170px;height: 180px" alt="Generic placeholder image">
-                  </div>
-                  <div class="flex-grow-1" style="padding-left: 10px; font-size: 18px">
-                    <h4 class="text-primary">{{booking.tours.schedule | slice: 0 : 60}}<span
-                      *ngIf="booking.tours.schedule.length > 60">...</span>
-                    </h4>
-                    <ul style="padding-left: 0">
-                      <li style="list-style: none">Địa điểm: <span
-                        class="text-primary">{{booking.tours.location.name}}</span>
-                      </li>
-                      <li style="list-style: none">Ngày bắt đầu: <span
-                        class="text-primary">{{booking.tours.startDate}}</span>
-                      </li>
-                      <li style="list-style: none">Ngày kết thúc: <span
-                        class="text-primary">{{booking.tours.endDate}}</span>
-                      </li>
-                      <li style="list-style: none">Số chỗ còn lại: <span
-                        class="text-primary">{{booking.tours.remaining}}</span>
-                      </li>
-                      <li>
-                        <div class="d-flex">
-                          <button class="btn btn-link px-2" style="background-color: #FF9933"
-                                  (click)="changeQuantity(slot.value,i)"
-                                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                            <i class="fas fa-minus" style="color: white"></i>
-                          </button>
-                          <label>
-                            <input min="0" style="width: 50px; height: 30px;text-align: center" name="quantity"
-                                   [value]="booking.slot" #slot (change)="changeQuantity(slot.value,i)"
-                                   type="number"
-                                   class="form-control form-control-sm"/>
-                          </label>
-                          <button class="btn btn-link px-2" style="background-color: #FF9933"
-                                  (click)="changeQuantity(slot.value,i)"
-                                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                            <i class="fas fa-plus" style="color: white"></i>
-                          </button>
-                          <button style="margin-left: 10px" class="btn btn-danger" type="button"
-                                  (click)="deleteTour(booking.id)">Hủy bỏ
-                          </button>
-                        </div>
-                      </li>
-                      <li>
-                      <li style="list-style: none">Tổng tiền: <span
-                        class="text-primary">{{booking.tours.price * booking.slot | number}}<sup>đ</sup></span>
-                      </li>
-                    </ul>
+                <div class="col-lg-4 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                  <div class="">
+                    <div class="d-flex">
+                      <button class="btn btn-link px-2" style="background-color: #FF9933; height: 30px"
+                              (click)="changeQuantity(slot.value,i)"
+                              onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                        <i class="fas fa-minus" style="color: white"></i>
+                      </button>
+                      <label>
+                        <input min="0" style="width: 50px; height: 30px;text-align: center" name="quantity"
+                               [value]="booking.slot" #slot (change)="changeQuantity(slot.value,i)"
+                               type="number"
+                               class="form-control form-control-sm"/>
+                      </label>
+                      <button class="btn btn-link px-2" style="background-color: #FF9933;height: 30px"
+                              (click)="changeQuantity(slot.value,i)"
+                              onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                        <i class="fas fa-plus" style="color: white"></i>
+                      </button>
+                    </div>
+                    <div class="text-center">
 
+                      <p class="text-muted text-nowrap "> {{booking.tours.price | number}}<sup>đ</sup>/ 1 vé </p>
+                      <p class="text-danger text-nowrap">{{booking.tours.price * booking.slot | number}}
+                        <sup>đ</sup></p>
+                    </div>
+                  </div>
+                  <div
+                    class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                    <div class="float-md-end">
+                      <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i
+                        class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                      <a (click)="deleteTour(booking.id)" class="btn btn-light border text-danger icon-hover-danger">
+                        Hủy</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 px-5 py-4">
-              <h3 class="text-center fw-bold text-uppercase" style="margin-top: 2px; padding-bottom: 5px">Thanh
-                toán</h3>
-              <article class="card">
-                <div class="" style="background-color: #e1f5fe; padding: 5px">
-                  <h3 class="fw-bold mb-0" style="justify-content: space-between">Tổng tiền: <span
-                    class="text-danger">{{total | number}}
-                    <sup>đ</sup></span>
-                  </h3>
-                </div>
-                <div class="card-body">
-                  <div class="d-flex gap-2 mb-2">
-                    <button style="height: 30px; font-size: 14px; margin-right: 5px" class="btn w-100 btn-success"
-                            *ngIf="!checkShow"
-                            (click)="showRender()"
-                            type="button">
-                      Thanh toán
-                    </button>
-                    <button routerLink="/" style="height: 30px;  font-size: 14px" class="btn w-100 btn-primary"
-                            type="button">
-                      Xem thêm tour
-                    </button>
-                  </div>
-                  <div id="paypal" style="margin-top: 10px"></div>
-                </div>
-              </article>
+            <div class="border-top pt-4 mx-4 mb-4">
+              <p><i class="fas fa-truck text-muted fa-lg"></i> Free Delivery within 1-2 weeks</p>
+              <p class="text-muted">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip
+              </p>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 border shadow-0">
+          <div class="card-body">
 
+            <div class="form-group">
+              <label class="form-label">Mã giảm giá?</label>
+              <div class="input-group">
+                <input type="text" class="form-control border" name="" placeholder="Nhập giảm giá tại đây"/>
+                <button class="btn btn-light border">Xác nhận</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card shadow-0 border">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <p class="mb-2">Tổng tiền:</p>
+              <p class="mb-2">{{total | number}}<sup>đ</sup></p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="mb-2">Giảm giá:</p>
+              <p class="mb-2 text-success">0</p>
+            </div>
+            <hr/>
+            <div class="d-flex justify-content-between">
+              <p class="mb-2">Tổng tiền:</p>
+              <p class="mb-2 fw-bold text-danger">{{total | number}}<sup>đ</sup></p>
+            </div>
+            <div class="mt-3">
+              <a *ngIf="!checkShow"
+                 (click)="showRender()"
+                 type="button" class="btn btn-success w-100 shadow-0 mb-2">Thanh toán</a>
+              <a routerLink="/" class="btn btn-light w-100 border mt-2">Đặt thêm tour</a>
+              <div id="paypal" style="margin-top: 10px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" id="button" data-toggle="modal" data-target="#exampleModal">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tours không đủ số vé</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row gy-3" *ngFor="let tour of tourError; index as i">
+          <div class="col-lg-12">
+            <div class="me-lg-5">
+              <div class="d-flex">
+                <img [src]="tour.img"
+                     class="border rounded me-3" style="width: 128px; height: 128px;"/>
+                <div style="margin-left: 5px">
+                  <p>Lịch trình: &nbsp; <span
+                    style="color: #00d8d5">{{tour.schedule}}</span></p>
+                  <p> Số lượng còn lại: &nbsp; <span style="color: #00d8d5">{{tour.remaining}}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button style="padding: 5px 0 ;font-size: 20px" data-dismiss="modal" type="button" class="btn btn-primary">Đặt lại số lượng</button>
+      </div>
+    </div>
+  </div>
+</div>

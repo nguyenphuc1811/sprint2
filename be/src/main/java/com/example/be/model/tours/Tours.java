@@ -12,13 +12,11 @@ public class Tours {
     private String schedule;
     @ManyToOne
     private Location location;
-    @Column(nullable = false,columnDefinition = "date")
+    @Column(nullable = false, columnDefinition = "date")
     private String startDate;
-    @Column(nullable = false,columnDefinition = "date")
+    @Column(nullable = false, columnDefinition = "date")
     private String endDate;
     private Double price;
-    @ManyToOne
-    private TourGuide tourGuide;
     private Double cost;
     private int slot;
     private String img;
@@ -101,14 +99,6 @@ public class Tours {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public TourGuide getTourGuide() {
-        return tourGuide;
-    }
-
-    public void setTourGuide(TourGuide tourGuide) {
-        this.tourGuide = tourGuide;
     }
 
     public Double getCost() {

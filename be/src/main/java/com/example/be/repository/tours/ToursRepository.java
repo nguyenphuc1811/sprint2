@@ -66,17 +66,4 @@ public interface ToursRepository extends JpaRepository<Tours, Integer> {
             " where b.user_id = :id" +
             " group by t.id", nativeQuery = true)
     List<IToursDto> findAllByUser(@Param("id") int idUser);
-
-    @Query(value = "select t.*," +
-            "       t.start_date                      as startDate," +
-            "       t.end_date                        as endDate," +
-            "       l.name                            as location," +
-            "       l.id                            as locationId," +
-            "       t.slot - COALESCE(SUM(CASE WHEN b.payment = true THEN b.slot ELSE 0 END), 0) AS remaining" +
-            " from `tours` t" +
-            "         left join booking b on t.id = b.tours_id" +
-            "         left join `location` l on t.location_id = l.id" +
-            " where b.id = :id" +
-            " group by t.id", nativeQuery = true)
-    IToursDto findOneById(@Param("id") int id);
 }   

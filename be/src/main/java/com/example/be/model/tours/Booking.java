@@ -9,7 +9,7 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(columnDefinition = "date")
+    @Column(columnDefinition = "datetime")
     private String bookingDate;
     private int slot;
     @ManyToOne

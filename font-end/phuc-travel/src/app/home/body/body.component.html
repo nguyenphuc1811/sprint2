@@ -138,6 +138,11 @@
       <div class="row">
         <div class="col-md-4 col-sm-6" *ngFor="let tour of tours">
           <div class="single-package-item">
+            <div *ngIf="tour.remaining == 0" class="soldout-container" style="position: absolute;top: 400px;">
+              <div class="sold-out">Hết vé!</div>
+              <div class="divider"></div>
+              <div class="deets">Sỗ lượng chỗ đã được đặt hết</div>
+            </div>
             <img style="height: 233px;width: 100%"
                  src="{{tour.img}}"
                  alt="package-place">
@@ -153,26 +158,17 @@
                       *ngIf="tour.schedule.length > 60">...</span></span>
                   </li>
                   <li><span style="color: blue;">Số chỗ còn nhận : &nbsp;</span> <span
-                    style="color: red">{{tour.remaining}}</span></li>
+                    style="color: black">{{tour.remaining}}</span></li>
                   <li><span style="color: blue;">Ngày xuất phát: &nbsp; </span> <span
-                    style="color: red">{{tour.startDate}}</span>
+                    style="color: black">{{tour.startDate | date: 'dd/MM/yyyy'}}</span>
                   </li>
                   <li><span style="color: blue;">Ngày kết thúc: &nbsp; </span> <span
-                    style="color: red">{{tour.endDate}}</span>
+                    style="color: black">{{tour.endDate | date: 'dd/MM/yyyy'}}</span>
                   </li>
                 </ul>
               </div>
-              <!--              <div class="packages-review">-->
-              <!--                                <p>-->
-              <!--                                  <i class="fa fa-star"></i>-->
-              <!--                                  <i class="fa fa-star"></i>-->
-              <!--                                  <i class="fa fa-star"></i>-->
-              <!--                                  <i class="fa fa-star"></i>-->
-              <!--                                  <i class="fa fa-star"></i>-->
-              <!--                                </p>-->
-              <!--              </div>-->
               <div class="row justify-content-center">
-                <div class="about-btn">
+                <div class="about-btn" *ngIf="tour.remaining > 0">
                   <button (click)="addToCart(tour)" type="button" class="about-view packages-btn">
                     Đặt ngay
                   </button>

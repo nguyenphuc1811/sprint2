@@ -43,6 +43,6 @@ public class TourServiceImpl implements IToursService {
 
     @Override
     public IToursDto findOneById(int id) {
-        return toursRepository.findOneById(id);
+        return toursRepository.findByIdDto(id);
     }
 }

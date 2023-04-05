@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import {TokenService} from "../../service/user/token.service";
 import {BookingService} from "../../service/booking/booking.service";
 import {LoginService} from "../../service/user/login.service";
+import {ShareService} from "../../service/user/share.service";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -30,7 +31,8 @@ export class DetailComponent implements OnInit {
   constructor(private toursService: ToursService,
               private token: TokenService, private router: Router
     , private booking: BookingService,
-              private login: LoginService, private activatedRoute: ActivatedRoute) {
+              private login: LoginService, private activatedRoute: ActivatedRoute,
+              private share: ShareService) {
     this.activatedRoute.paramMap.subscribe(data => {
       const id = data.get('id');
       this.toursService.getDetail(parseInt(id)).subscribe(tour => {
@@ -46,13 +48,18 @@ export class DetailComponent implements OnInit {
     window.scroll(0, 980)
   }
 
-  addToCart(tour: Tours) {
+  addToCart(tour: Tours, slot: string) {
     if (this.token.isLogger()) {
       this.login.profile(this.token.getId()).subscribe(user => {
-        this.booking.addBooking(tour, user);
-        Toast.fire({
-          iconHtml: '<img style="width: 90px;height: 90px;object-fit: cover;padding: 10px"  src="' + tour.img + '">',
-          title: 'Bạn đã thêm ' + tour.name + ' vào giỏ!'
+        this.booking.addBookingAndSlot(tour, user, slot).subscribe(next => {
+          this.share.sendClickEvent();
+          Toast.fire({
+            html: '<span style="font-size: 16px;color: blue">Đã thêm vào giỏ hàng</span>  <img style="width: 300px;height: 100px;object-fit: cover"  src="' + tour.img + '">'
+          })
+        }, error => {
+          Toast.fire({
+            html: '<span style="font-size: 16px;color: red">Đã có trong giỏ hàng. Vui lòng nhập số lượng tại giỏ hàng</span>  <img style="width: 300px;height: 100px;object-fit: cover"  src="' + tour.img + '">'
+          })
         })
       })
     } else {
