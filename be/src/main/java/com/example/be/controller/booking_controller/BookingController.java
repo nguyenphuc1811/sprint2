@@ -34,9 +34,9 @@ public class BookingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookingCart(@PathVariable("id") int id) {
-        if (iUserService.findById(id) == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        if (iUserService.findById(id) == null) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
         List<Booking> bookingList = bookingService.findAllByPaymentAndUser(id, false);
         List<BookingDto> bookingDtos = new ArrayList<>();
         for (Booking booking : bookingList) {
@@ -88,7 +88,7 @@ public class BookingController {
     }
 
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<?> addBookingToCart(@RequestBody Booking booking) {
         if (bookingService.addBooking(booking)) {
             return new ResponseEntity<>(HttpStatus.OK);

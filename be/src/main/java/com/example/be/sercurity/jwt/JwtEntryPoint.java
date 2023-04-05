@@ -18,6 +18,6 @@ public class JwtEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, org.springframework.security.core.AuthenticationException authException) throws IOException, ServletException {
         logger.error("Unauthorized error Message: {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Sai tên đăng nhập hoặc mật khẩu");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Sai tên đăng nhập hoặc mật khẩu");
     }
 }

@@ -36,7 +36,7 @@ export class BodyComponent implements OnInit {
   page = 0;
   last: boolean;
   user: User;
-
+  isLogged = false;
   constructor(private toursService: ToursService,
               private token: TokenService, private router: Router
     , private booking: BookingService,
@@ -51,16 +51,26 @@ export class BodyComponent implements OnInit {
         this.last = data.last;
       }
     )
-    if (this.token.isLogger()) {
+    this.isLogged = this.token.isLogger()
+    this.loader();
+    this.share.getClickEvent().subscribe(
+      next => {
+        this.isLogged = this.token.isLogger()
+        this.loader();
+      }
+    )
+
+  }
+
+  ngOnInit(): void {
+  }
+  loader() {
+    if (this.isLogged) {
       this.login.profile(this.token.getId()).subscribe(user => {
         this.user = user;
       })
     }
   }
-
-  ngOnInit(): void {
-  }
-
   searchTours(id: string, startDate: string, slot: string) {
     this.page = 0;
     this.id = id;
@@ -94,6 +104,10 @@ export class BodyComponent implements OnInit {
           html: '<span style="font-size: 16px;color: blue">Đã thêm vào giỏ hàng</span>  <img style="width: 300px;height: 100px;object-fit: cover"  src="' + tour.img + '">'
         })
       }, error => {
+        console.log(error)
+        if (error.status == 401) {
+          this.router.navigateByUrl('/login')
+        }
         Toast.fire({
           html: '<span style="font-size: 16px;color: red">Đã có trong giỏ hàng. Vui lòng nhập số lượng tại giỏ hàng</span>  <img style="width: 300px;height: 100px;object-fit: cover"  src="' + tour.img + '">'
         })

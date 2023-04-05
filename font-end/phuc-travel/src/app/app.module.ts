@@ -7,12 +7,13 @@ import {HomeModule} from "./home/home.module";
 import {HeaderComponent} from "./home/header/header.component";
 import {FooterComponent} from "./home/footer/footer.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenService} from "./service/user/token.service";
 import {LoginModule} from "./login/login.module";
 import { AngularFireStorageModule } from '@angular/fire/storage/public_api';
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
+import {AuthInterceptor} from "./service/sercurity/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,12 @@ import {environment} from "../environments/environment";
     // AngularFireStorageModule,
     // AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [TokenService],
+  providers: [TokenService,
+  ,{
+    provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
