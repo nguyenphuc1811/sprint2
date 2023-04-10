@@ -241,22 +241,28 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
-<div class="container">
+<div class="" >
   <div class="profile-header">
-    <div class="profile-img">
+    <div class="profile-img" style="position: relative">
       <img src="{{user.avatar}}" width="200" alt="Profile Image">
+      <div class="button">
+<!--        <button data-toggle="modal" type="button" data-bs-target="#avatarModal" class="buttonAvatar">Ảnh đại điện</button>-->
+        <button type="button" class="buttonAvatar" data-toggle="modal" data-target="#avatarModal">
+          Chỉnh sửa
+        </button>
+      </div>
     </div>
-    <div class="profile-nav-info">
-      <h2 class="">{{user.name}}</h2>
-      <div class="address">
-        <p id="state" class="state">{{user.address}}</p>
-        <span id="country" class="country">Việt Nam.</span>
+    <div class="profile-nav-info" style="margin-bottom: -10px">
+      <h3 class="text2">{{user.name| titlecase}}</h3>
+      <div class="address" style="color: #dddddd">
+        <p id="state" class="state text-black-50">{{user.address}},</p>
+        <span id="country" class="country text-black-50">Việt Nam.</span>
       </div>
 
     </div>
     <div class="profile-option">
-      <div class="notification">
-        <i class="fa fa-bell"></i>
+      <div class="notification" data-bs-toggle="modal" data-bs-target="#editModal">
+        <i class="fa-solid fa-user-gear"></i>
         <span class="alert-message">3</span>
       </div>
     </div>
@@ -267,10 +273,10 @@
         <p class="mobile-no"><i class="fa fa-phone"></i> +{{user.phoneNumber | slice: 0: 2}}
           XXXXX{{user.phoneNumber | slice: 8 }}</p>
         <p class="user-mail"><i class="fa fa-envelope"></i>{{user.email}}</p>
-        <p class="user-mail"><i class="fa-solid fa-face-smile"></i>18</p>
+        <p class="user-mail"><i class="fa-solid fa-face-smile"></i>{{user.age}}</p>
         <p class="user-mail"><i class="fa-solid fa-venus-mars"></i>
-          <span *ngIf="user.gender == true">Nam</span>
-          <span *ngIf="user.gender == false">Nữ</span></p>
+          <span>{{user.gender ? 'Nam' : 'Nữ'}}</span>
+        </p>
         <p class="user-mail"><i class="fa-solid fa-cake-candles"></i>{{user.dateOfBirth}}</p>
       </div>
     </div>
@@ -284,7 +290,7 @@
       </div>
       <div class="profile-body">
         <div *ngIf="choice == 0">
-          <table class="table-text table table-hover" style="height: 375px">
+          <table class="table-text table table-hover" style="height: 375px;border: 1px solid black">
             <thead>
             <tr style="background: #005ec4;color: white" class="text3">
               <th>STT</th>
@@ -308,15 +314,19 @@
             </tr>
             </tbody>
           </table>
-          <div style="margin-left: 375px;margin-top: -10px">
+          <div class="text-center">
             <button class="btn btn-outline-primary" [disabled]="first == true" (click)="getHistory(number -1)"
-                    style="border-radius: 0;margin: 10px"><i style="margin-right: 8px"
-                                                             class="fa-solid fa-circle-chevron-left"></i> <span class="text2">Trang trước</span>
+                    style="border-radius: 0;width: 120px;height:30px;margin: 10px"><i style="margin-right: 8px"
+                                                                                      class="fa-solid fa-circle-chevron-left"></i>
+              <span class="text2">Trang trước</span>
             </button>
-            <button class="btn btn-outline-primary" style="border-radius: 0;"><span class="text2">{{number + 1}}</span></button>
+            <button class="btn btn-outline-primary" style="border-radius: 0;width: 30px;height:30px;"><span
+              class="text2">{{number + 1}}</span></button>
             <button class="btn btn-outline-primary" [disabled]="last == true" (click)="getHistory(number +1)"
-                    style="border-radius: 0;margin: 10px"><span class="text2" style="margin-right: 8px">Trang sau</span> <i
-              class="fa-solid fa-circle-chevron-right"></i></button>
+                    style="border-radius: 0;width: 120px;height:30px;margin: 10px"><span class="text2"
+                                                                                         style="margin-right: 8px">Trang sau</span>
+              <i
+                class="fa-solid fa-circle-chevron-right"></i></button>
           </div>
         </div>
         <div *ngIf="choice == 1">
@@ -331,7 +341,7 @@
         </div>
         <div *ngIf="choice == 2">
           <div class="account-setting">
-            <h1>Acount Setting</h1>
+            <h1>Chỉnh sửa</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit omnis eaque, expedita nostrum,
               facere libero provident laudantium. Quis, hic doloribus! Laboriosam nemo tempora praesentium. Culpa quo
               velit omnis, debitis maxime, sequi
@@ -341,6 +351,33 @@
               nihil, recusandae, omnis officiis tenetur, ullam rerum.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="top: 100px;
+    left: 85%;" >
+      <div class="modal-header" style="height: 45px">
+        <h4 class="modal-title text text-center" id="exampleModalLabel2" style="padding: 10px">Cập nhật ảnh đại diện</h4>
+        <button id="avatarDissmiss" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label class="hoverable" for="fileInput">
+          <img class="img" *ngIf="isLoading == false" [src]="src ? fb : 'https://i.pinimg.com/736x/c6/e5/65/c6e56503cfdd87da299f72dc416023d4.jpg'">
+          <img class="img" *ngIf="isLoading == true" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921">
+          <div class="background">
+            <i   class="fa-solid fa-image iconAvatar"></i>
+            <p class="textAvatar text-center">Chọn ảnh</p>
+          </div>
+        </label>
+        <br/>
+        <input id="fileInput" type='file' (change)="showPreview($event)">
+        <i style="margin-right: 10px" class="fa-solid fa-earth-americas"></i> <span class="text">Ảnh đại diện của bạn hiển thị công khai.</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary text3" (click)="changeAvatar()">Xác nhận</button>
       </div>
     </div>
   </div>

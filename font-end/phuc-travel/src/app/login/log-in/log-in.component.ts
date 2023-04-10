@@ -37,7 +37,7 @@ export class LogInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    window.scroll(0, 980)
+    window.scroll(0, 1000)
     this.title.setTitle('Trang Đăng Nhập');
     this.islogged = this.token.isLogger();
     if (this.islogged) {

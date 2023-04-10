@@ -74,7 +74,7 @@
   color: #495057;
 }
 
-@media not all and (min-resolution:.001dpcm) {
+@media not all and (min-resolution: .001dpcm) {
   @supports (-webkit-appearance: none) and (stroke-color:transparent) {
 
     .number-input.def-number-input.safari_only button:before,
@@ -122,9 +122,11 @@
 span {
   font-size: 16px;
 }
+
 li .d-flex button {
   height: 30px;
 }
+
 .icon-hover-primary:hover {
   border-color: #3b71ca !important;
   background-color: white !important;
@@ -133,6 +135,7 @@ li .d-flex button {
 .icon-hover-primary:hover i {
   color: #3b71ca !important;
 }
+
 .icon-hover-danger:hover {
   border-color: #dc4c64 !important;
   background-color: white !important;
@@ -141,3 +144,4 @@ li .d-flex button {
 .icon-hover-danger:hover i {
   color: #dc4c64 !important;
 }
+

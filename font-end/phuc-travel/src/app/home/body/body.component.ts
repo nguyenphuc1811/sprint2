@@ -29,14 +29,15 @@ const Toast = Swal.mixin({
 })
 export class BodyComponent implements OnInit {
   tours: Tours[] = [];
-  locations: Location[];
+  locations: Location[] = [];
   id = '0';
-  startDate = '';
-  slot = '0';
+  startDate1 = '';
+  slot1 = '0';
   page = 0;
   last: boolean;
   user: User;
   isLogged = false;
+
   constructor(private toursService: ToursService,
               private token: TokenService, private router: Router
     , private booking: BookingService,
@@ -45,7 +46,7 @@ export class BodyComponent implements OnInit {
     this.toursService.getLocation().subscribe(data => {
       this.locations = data;
     })
-    this.toursService.getTours(this.id, this.startDate, this.slot, this.page).subscribe(
+    this.toursService.getTours(this.id, this.startDate1, this.slot1, this.page).subscribe(
       data => {
         this.tours = data.content;
         this.last = data.last;
@@ -64,6 +65,7 @@ export class BodyComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   loader() {
     if (this.isLogged) {
       this.login.profile(this.token.getId()).subscribe(user => {
@@ -71,13 +73,14 @@ export class BodyComponent implements OnInit {
       })
     }
   }
+
   searchTours(id: string, startDate: string, slot: string) {
     this.page = 0;
     this.id = id;
-    this.startDate = startDate;
-    this.slot = slot;
+    this.startDate1 = startDate;
+    this.slot1 = slot;
     window.scroll(0, 2000)
-    this.toursService.getTours(this.id, this.startDate, this.slot, this.page).subscribe(
+    this.toursService.getTours(this.id, this.startDate1, this.slot1, this.page).subscribe(
       data => {
         this.tours = data.content;
         this.last = data.last;
@@ -86,7 +89,7 @@ export class BodyComponent implements OnInit {
   }
 
   seeMore() {
-    this.toursService.getTours(this.id, this.startDate, this.slot, ++this.page).subscribe(
+    this.toursService.getTours(this.id, this.startDate1, this.slot1, ++this.page).subscribe(
       data => {
         for (let i = 0; i < data.content.length; i++) {
           this.tours.push(data.content[i]);

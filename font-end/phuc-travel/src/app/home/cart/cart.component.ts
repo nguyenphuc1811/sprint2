@@ -40,6 +40,7 @@ export class CartComponent implements OnInit, OnDestroy {
         currency: "USD",
         value: String(money),
         onApprove: (details) => {
+          console.log(details)
           if (details.status == 'COMPLETED') {
             this.bookingService.buyAll(this.bookings).subscribe(data => {
               Swal.fire({
@@ -118,6 +119,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.bookingService.updateCart(this.bookings).subscribe();
+    console.log("adada")
   }
 
   getTotal() {

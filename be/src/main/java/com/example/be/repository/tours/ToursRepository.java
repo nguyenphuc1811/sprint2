@@ -23,7 +23,7 @@ public interface ToursRepository extends JpaRepository<Tours, Integer> {
             "         left join `location` l on t.location_id = l.id" +
             " where t.start_date >= :startDate " +
             " group by t.id" +
-            " having remaining >= :slot" +
+            " having remaining >= :slot and t.start_date >= curdate()" +
             " order by t.start_date", nativeQuery = true)
     Page<IToursDto> getAllDto(Pageable pageable, @Param("slot") int slot, @Param("startDate") String startDate);
 
@@ -36,9 +36,9 @@ public interface ToursRepository extends JpaRepository<Tours, Integer> {
             " from `tours` t" +
             "         left join `booking` b on t.id = b.tours_id" +
             "         left join `location` l on t.location_id = l.id" +
-            " where t.start_date >= :startDate & l.id = :id" +
+            " where t.start_date >= :startDate and l.id = :id" +
             " group by t.id" +
-            " having remaining >= :slot" +
+            " having remaining >= :slot and t.start_date >= curdate()" +
             " order by t.start_date", nativeQuery = true)
     Page<IToursDto> getAllByLocationDto(Pageable pageable, @Param("slot") int slot, @Param("startDate") String StartDate, @Param("id") int id);
 
@@ -52,7 +52,7 @@ public interface ToursRepository extends JpaRepository<Tours, Integer> {
             "         left join `booking` b on t.id = b.tours_id" +
             "         left join `location` l on t.location_id = l.id" +
             " where t.id = :id", nativeQuery = true)
-    IToursDto findByIdDto(@Param("id") int id);
+    IToursDto findByIdDto(@Param("id")  int id);
 
     @Query(value = "select t.*," +
             "       t.start_date                      as startDate," +

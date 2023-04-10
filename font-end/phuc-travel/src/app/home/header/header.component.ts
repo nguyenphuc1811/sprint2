@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.share.sendClickEvent();
     this.loader();
     this.share.getClickEvent().subscribe(() => {
       this.loader();

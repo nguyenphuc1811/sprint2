@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -32,6 +33,7 @@ public class BookingController {
     @Autowired
     private IToursService toursService;
 
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookingCart(@PathVariable("id") int id) {
 //        if (iUserService.findById(id) == null) {
@@ -69,6 +71,7 @@ public class BookingController {
 //        }
 //        return new ResponseEntity<>(stringListMap, HttpStatus.OK);
 //    }
+
     @GetMapping("detail/{id}")
     public ResponseEntity<?> getBookingCartPayment(@PathVariable("id") int id,
                                                    @PageableDefault(size = 5) Pageable pageable) {
@@ -87,7 +90,7 @@ public class BookingController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/add")
     public ResponseEntity<?> addBookingToCart(@RequestBody Booking booking) {
         if (bookingService.addBooking(booking)) {

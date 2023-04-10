@@ -71,7 +71,7 @@ public class BookingServiceImpl implements IBookingService {
     public void saveQuantity(List<Booking> bookingList) {
         for (Booking booking : bookingList) {
             bookingRepository.updateBooking(
-                    booking.getSlot(), false, booking.getId(), "");
+                    booking.getSlot(), false, booking.getId(), null);
         }
     }
 

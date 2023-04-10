@@ -1,5 +1,6 @@
 package com.example.be.service.impl;
 
+import com.example.be.dto.tours.ILocationDto;
 import com.example.be.model.tours.Location;
 import com.example.be.repository.tours.LocationRepository;
 import com.example.be.service.ILocationService;
@@ -15,5 +16,9 @@ public class LocationServiceImpl implements ILocationService {
 
     public List<Location> getAll() {
         return this.locationRepository.findAll();
+    }
+
+    public List<ILocationDto> getLocationByQuantityTour() {
+        return locationRepository.getLocationByQuantityTour();
     }
 }

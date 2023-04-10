@@ -4,31 +4,28 @@
     <div class="row">
       <!--Grid column-->
       <div class="col-md-6 mb-4">
-        <img src="{{tour.img}}" class="img-fluid" alt="" />
+        <img src="{{tour.img}}" class="img-fluid" alt=""/>
       </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
       <div class="col-md-6 mb-4">
         <!--Content-->
         <div class="p-4">
-          <div class="mb-3">
-            <a href="">
-              <span class="badge bg-dark me-1">Category 2</span>
-            </a>
-            <a href="">
-              <span class="badge bg-info me-1">New</span>
-            </a>
-            <a href="">
-              <span class="badge bg-danger me-1">Bestseller</span>
-            </a>
-          </div>
+          <!--          <div class="mb-3">-->
+          <!--            <a href="">-->
+          <!--              <span class="badge bg-dark me-1">Category 2</span>-->
+          <!--            </a>-->
+          <!--            <a href="">-->
+          <!--              <span class="badge bg-info me-1">New</span>-->
+          <!--            </a>-->
+          <!--            <a href="">-->
+          <!--              <span class="badge bg-danger me-1">Bestseller</span>-->
+          <!--            </a>-->
+          <!--          </div>-->
 
           <p class="lead" style="font-size: 18px">
                         <span class="me-1">
                           <del>{{tour.price * 1.2 | number}}<sup>đ</sup></del>
                         </span>
-            <span  class="text-danger" style="margin-left: 10px">{{tour.price | number}}<sup>đ</sup>/ 1 vé</span>
+            <span class="text-danger" style="margin-left: 10px">{{tour.price | number}}<sup>đ</sup>/ 1 vé</span>
           </p>
           <strong><p style="font-size: 20px;">Thông tin:</p></strong>
           <ul style="font-size: 16px">
@@ -41,12 +38,16 @@
           </ul>
           <div class="d-flex justify-content-left">
             <!-- Default input -->
-            <div class="form-outline me-1" style="width: 100px;">
-              <input #slot type="number" value="0" min="0" class="form-control" />
+            <div class="form-outline me-1" style="width: 100px;margin-right: 10px">
+              <input #slot type="number" [readOnly]="tour.remaining == 0" value="0" min="0" class="form-control"/>
             </div>
-            <button (click)="addToCart(tour,slot.value)" class="btn btn-primary ms-1" type="button">
+            <button *ngIf="tour.remaining != 0" (click)="addToCart(tour,slot.value)" class="btn btn-primary ms-1"
+                    style="margin-right: 10px" type="button">
               Thêm vào giỏ
               <i class="fas fa-shopping-cart ms-1"></i>
+            </button>
+            <button routerLink="/" class="btn btn-warning ms-1" type="button">
+              Xem thêm tour khác
             </button>
           </div>
         </div>
@@ -55,36 +56,36 @@
       <!--Grid column-->
     </div>
     <!--Grid row-->
-    <hr />
+    <hr/>
     <!--Grid row-->
-<!--    <div class="row d-flex justify-content-center">-->
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
-<!--      <div class="col-md-6 text-center">-->
-<!--        <h4 class="my-4 h4">Additional information</h4>-->
+    <!--    <div class="row d-flex justify-content-center">-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--      <div class="col-md-6 text-center">-->
+    <!--        <h4 class="my-4 h4">Additional information</h4>-->
 
-<!--        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit voluptates, quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>-->
-<!--      </div>-->
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
-<!--    </div>-->
-<!--    <div class="row">-->
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
-<!--      <div class="col-lg-4 col-md-12 mb-4">-->
-<!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="" />-->
-<!--      </div>-->
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit voluptates, quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>-->
+    <!--      </div>-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--    </div>-->
+    <!--    <div class="row">-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--      <div class="col-lg-4 col-md-12 mb-4">-->
+    <!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="" />-->
+    <!--      </div>-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
 
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
-<!--      <div class="col-lg-4 col-md-6 mb-4">-->
-<!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="" />-->
-<!--      </div>-->
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--      <div class="col-lg-4 col-md-6 mb-4">-->
+    <!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="" />-->
+    <!--      </div>-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
 
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
-<!--      <div class="col-lg-4 col-md-6 mb-4">-->
-<!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="" />-->
-<!--      </div>-->
-<!--      &lt;!&ndash;Grid column&ndash;&gt;-->
-<!--    </div>-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--      <div class="col-lg-4 col-md-6 mb-4">-->
+    <!--        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="" />-->
+    <!--      </div>-->
+    <!--      &lt;!&ndash;Grid column&ndash;&gt;-->
+    <!--    </div>-->
     <!--Grid row-->
   </div>
 </main>

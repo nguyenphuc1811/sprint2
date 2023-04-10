@@ -62,3 +62,14 @@ body {
 .almost > div:nth-child(2) {
   background-color:#337ab7;
 }
+.item-title a {
+  color: white;
+}
+option{
+  overflow-y:scroll;
+}
+#select-box{
+  /*height:20px;*/
+  overflow-y:auto;
+  /*width:50px;*/
+}

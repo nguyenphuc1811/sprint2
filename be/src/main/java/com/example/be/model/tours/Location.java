@@ -11,6 +11,15 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String imgLocation;
+
+    public String getImgLocation() {
+        return imgLocation;
+    }
+
+    public void setImgLocation(String imgLocation) {
+        this.imgLocation = imgLocation;
+    }
 
     public Integer getId() {
         return id;

@@ -40,7 +40,7 @@ public class HomeController {
 
     @GetMapping("location")
     public ResponseEntity<?> getLocation() {
-        return new ResponseEntity<>(locationService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(locationService.getLocationByQuantityTour(), HttpStatus.OK);
     }
 
     @GetMapping("detail")
