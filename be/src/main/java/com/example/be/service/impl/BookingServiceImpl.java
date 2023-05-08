@@ -1,20 +1,15 @@
 package com.example.be.service.impl;
 
-import com.example.be.dto.tours.BookingDto;
 import com.example.be.dto.tours.IToursDto;
 import com.example.be.model.tours.Booking;
-import com.example.be.model.tours.Tours;
-import com.example.be.model.user.User;
 import com.example.be.repository.booking.BookingRepository;
 import com.example.be.repository.tours.ToursRepository;
 import com.example.be.service.IBookingService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;

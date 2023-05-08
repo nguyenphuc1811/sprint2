@@ -71,7 +71,7 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.share.getClickEvent();
     window.scroll(0, 1000)
-
+    console.log('nam ngu')
   }
 
 
@@ -119,7 +119,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.bookingService.updateCart(this.bookings).subscribe();
-    console.log("adada")
+
   }
 
   getTotal() {

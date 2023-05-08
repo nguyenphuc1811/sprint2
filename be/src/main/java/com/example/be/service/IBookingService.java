@@ -1,9 +1,7 @@
 package com.example.be.service;
 
-import com.example.be.dto.tours.BookingDto;
 import com.example.be.dto.tours.IToursDto;
 import com.example.be.model.tours.Booking;
-import com.example.be.model.tours.Tours;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -28,4 +26,5 @@ public interface IBookingService {
     List<IToursDto> checkRemaining(List<Booking> bookingList);
 
     Page<Booking> getDetailPayment(int id, Pageable pageable);
+
 }

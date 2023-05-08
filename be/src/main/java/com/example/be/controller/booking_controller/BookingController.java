@@ -3,7 +3,6 @@ package com.example.be.controller.booking_controller;
 import com.example.be.dto.tours.BookingDto;
 import com.example.be.dto.tours.IToursDto;
 import com.example.be.model.tours.Booking;
-import com.example.be.model.tours.Tours;
 import com.example.be.service.IBookingService;
 import com.example.be.service.IToursService;
 import com.example.be.service.IUserService;
@@ -13,14 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin("*")

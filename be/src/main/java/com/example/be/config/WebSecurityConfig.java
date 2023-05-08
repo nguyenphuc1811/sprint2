@@ -4,6 +4,7 @@ import com.example.be.sercurity.jwt.JwtEntryPoint;
 import com.example.be.sercurity.jwt.JwtTokenFilter;
 import com.example.be.sercurity.userPrincipcal.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,6 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Bean
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
@@ -52,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/api/booking/add").hasAnyRole("CUSTOMER","EMPLOYEE")
+//                .antMatchers("/api/booking/add").hasAnyRole("C    USTOMER","EMPLOYEE")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
